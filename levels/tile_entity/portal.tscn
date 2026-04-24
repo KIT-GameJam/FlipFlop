@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://d1pqg0iqd34e"]
+
+[ext_resource type="Texture2D" uid="uid://bta4h2svhcjry" path="res://assets/tiles/fog.png" id="1_cyjeh"]
+
+[node name="Portal" type="Node2D" unique_id=896268931]
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1050407813]
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+texture = ExtResource("1_cyjeh")
