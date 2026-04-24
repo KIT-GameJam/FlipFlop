@@ -17,6 +17,7 @@ mono_crash.*.json
 export/
 
 .vscode/
+.idea
 
 # android export for vr
 android/
