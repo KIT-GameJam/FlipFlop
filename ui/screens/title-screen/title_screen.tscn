@@ -48,7 +48,7 @@ autowrap_mode = 2
 [node name="Label2" type="Label" parent="CenterContainer/VBoxContainer" unique_id=2117014839]
 custom_minimum_size = Vector2(731.345, 0)
 layout_mode = 2
-text = "Game of the Year Edtion"
+text = "Game of the Year Edition"
 label_settings = SubResource("LabelSettings_73xnf")
 horizontal_alignment = 1
 autowrap_mode = 2
@@ -71,11 +71,6 @@ layout_mode = 2
 layout_mode = 2
 theme_override_font_sizes/font_size = 16
 text = "Start"
-
-[node name="LevelSelect" type="Button" parent="CenterContainer2/VBoxContainer" unique_id=1964255967]
-layout_mode = 2
-theme_override_font_sizes/font_size = 16
-text = "Level Select"
 
 [node name="Options" type="Button" parent="CenterContainer2/VBoxContainer" unique_id=1650158032]
 layout_mode = 2
@@ -110,7 +105,6 @@ label_settings = SubResource("LabelSettings_wly7t")
 horizontal_alignment = 1
 
 [connection signal="pressed" from="CenterContainer2/VBoxContainer/Start" to="." method="_on_start_pressed"]
-[connection signal="pressed" from="CenterContainer2/VBoxContainer/LevelSelect" to="." method="_on_level_select_pressed"]
 [connection signal="pressed" from="CenterContainer2/VBoxContainer/Options" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="CenterContainer2/VBoxContainer/Credit" to="." method="_on_credit_pressed"]
 [connection signal="pressed" from="CenterContainer2/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
