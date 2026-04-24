@@ -5,10 +5,13 @@ extends CharacterBody2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var flipped: bool = false
-@onready var in_flipping_animation = false
+@onready var in_flipping_animation: bool = false
 
 const SPEED: float = 300.0
 const JUMP_VELOCITY: float = -400.0
+const COYOTE_TIME: float = 0.15
+
+var coyote_timer: float = 0.0
 
 func _ready():
 	sprite.modulate = Color.BLACK
@@ -47,20 +50,29 @@ func _can_flip_to(target_collision_position: Vector2) -> bool:
 
 func _fail_flip():
 	animation_player.play("flipflop_up" if flipped else "flipflop_down")
+	in_flipping_animation = true
 
 func _get_flipped_integer() -> int:
 	return 1 if flipped else -1
 
 func _physics_process(delta: float) -> void:
 	var on_ground: bool = is_on_ground()
+	
+	if on_ground:
+		coyote_timer = COYOTE_TIME
+	else:
+		coyote_timer -= delta
+	
 	# Add the gravity.
 	if not on_ground:
 		velocity += get_gravity() * delta * (-1 if flipped else 1)
 	
-	if Input.is_action_just_pressed("jump") and on_ground:
+	if Input.is_action_just_pressed("jump") and coyote_timer > 0:
 		velocity.y = JUMP_VELOCITY * (-1 if flipped else 1)
-	elif Input.is_action_just_pressed("flip") and on_ground:
+		coyote_timer = 0
+	elif Input.is_action_just_pressed("flip") and coyote_timer > 0:
 		flip()
+		coyote_timer = 0
 	
 	if not in_flipping_animation:
 		var direction := Input.get_axis("move_left", "move_right")
