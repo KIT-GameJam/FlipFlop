@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cyfvcuxi210mg"]
 
-[ext_resource type="Script" uid="uid://bp6dajvjaofem" path="res://levels/abstract_level.gd" id="1_c78cs"]
+[ext_resource type="Script" path="res://levels/abstract_level.gd" id="1_c78cs"]
 [ext_resource type="Texture2D" uid="uid://c7yg15vg2wufa" path="res://assets/tiles/tiles_atlas.png" id="2_8tasw"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1u8rv"]
@@ -10,13 +10,13 @@ texture_region_size = Vector2i(40, 40)
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-20, -20, 20, -20, 20, 20, -20, 20)
 0:1/0 = 0
 0:1/0/physics_layer_1/polygon_0/points = PackedVector2Array(-20, -20, 20, -20, 20, 20, -20, 20)
-0:2/0 = 0
 1:2/0 = 0
 1:2/0/physics_layer_2/polygon_0/points = PackedVector2Array(-20, -20, 20, -20, 20, 20, -20, 20)
 0:3/0 = 0
-0:3/0/physics_layer_3/polygon_0/points = PackedVector2Array(-20, -20, 20, -20, 20, 20, -20, 20)
+0:3/0/physics_layer_3/polygon_0/points = PackedVector2Array(-20, -4.091425, 20, -4.091425, 20, 3.93919, -20, 4.0204096)
 1:3/0 = 0
-1:3/0/physics_layer_3/polygon_0/points = PackedVector2Array(-20, -20, 20, -20, 20, 20, -20, 20)
+1:3/0/physics_layer_3/polygon_0/points = PackedVector2Array(-20, -4.091425, 20, -4.091425, 20, 3.93919, -20, 4.0204096)
+0:2/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_ldao0"]
 tile_size = Vector2i(40, 40)

@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://b54suilbngo83" path="res://entities/player.gd" id="1_eh0f6"]
 [ext_resource type="Texture2D" uid="uid://b4rsbwgm2lafu" path="res://assets/entities/Player.png" id="2_ojs4q"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_ojs4q"]
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_eh0f6"]
 radius = 15.0
 height = 70.0
@@ -216,6 +218,13 @@ collision_layer = 8
 collision_mask = 12
 script = ExtResource("1_eh0f6")
 
+[node name="HitBox" type="Area2D" parent="." unique_id=2120278500]
+collision_layer = 16
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=94176873]
+shape = SubResource("CircleShape2D_ojs4q")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1080355892]
 position = Vector2(0, -35)
 shape = SubResource("CapsuleShape2D_eh0f6")
@@ -228,4 +237,5 @@ texture = ExtResource("2_ojs4q")
 libraries/ = SubResource("AnimationLibrary_l1ths")
 speed_scale = 2.0
 
+[connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

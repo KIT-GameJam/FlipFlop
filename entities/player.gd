@@ -78,6 +78,10 @@ func _physics_process(delta: float) -> void:
 		var direction := Input.get_axis("move_left", "move_right")
 		if direction:
 			velocity.x = direction * SPEED
+			if direction < 0:
+				sprite.scale.x = -1
+			elif direction > 0:
+				sprite.scale.x = 1
 		else:
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 	else:
@@ -88,3 +92,7 @@ func _physics_process(delta: float) -> void:
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	in_flipping_animation = false
+
+
+func _on_hit_box_area_entered(area: Area2D) -> void:
+	print("kill")
