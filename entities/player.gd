@@ -17,6 +17,10 @@ func flip():
 		_flip_up()
 	else:
 		_flip_down()
+	flipped = !flipped
+
+func is_on_ground():
+	return (is_on_ceiling() if flipped else is_on_floor())
 
 func _flip_up():
 	animation_player.play("flip_up")
@@ -31,15 +35,16 @@ func _flip_down():
 	set_collision_mask_value(3, false)
 
 func _physics_process(delta: float) -> void:
+	var on_ground = is_on_ground()
 	# Add the gravity.
-	if not is_on_floor():
+	if not on_ground:
 		velocity += get_gravity() * delta * (-1 if flipped else 1)
 	
-	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
-	elif Input.is_action_just_pressed("flip") and is_on_floor():
+	if Input.is_action_just_pressed("jump") and on_ground:
+		velocity.y = JUMP_VELOCITY * (-1 if flipped else 1)
+	elif Input.is_action_just_pressed("flip") and on_ground:
 		flip()
-
+	
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var direction := Input.get_axis("move_left", "move_right")
