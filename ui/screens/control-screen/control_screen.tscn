@@ -1,0 +1,74 @@
+[gd_scene format=3 uid="uid://bpr6du5ydm0lw"]
+
+[ext_resource type="Theme" uid="uid://hheneshfv1b2" path="res://ui/themes/your_theme.tres" id="1_x8l5g"]
+[ext_resource type="Script" uid="uid://c1i00arsdf2mw" path="res://ui/screens/control-screen/control_screen.gd" id="2_wdxwm"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_5tgjf"]
+font_size = 60
+
+[node name="ControlScreen" type="Control" unique_id=707664794]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_x8l5g")
+script = ExtResource("2_wdxwm")
+
+[node name="Panel" type="Panel" parent="." unique_id=1329424348]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ControlsTitle" type="Label" parent="." unique_id=1553206497]
+custom_minimum_size = Vector2(731.345, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -576.0
+offset_top = 25.0
+offset_right = 576.0
+offset_bottom = 108.0
+grow_horizontal = 2
+text = "Controls"
+label_settings = SubResource("LabelSettings_5tgjf")
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="ControlsTitle2" type="Label" parent="." unique_id=394444381]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -86.5
+offset_top = -11.5
+offset_right = 86.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Put your controls here"
+horizontal_alignment = 1
+
+[node name="Continue" type="Button" parent="." unique_id=426511693]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -39.5
+offset_top = -58.0
+offset_right = 39.5
+offset_bottom = -27.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Continue"
+
+[connection signal="pressed" from="Continue" to="." method="_on_continue_pressed"]
