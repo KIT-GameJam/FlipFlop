@@ -1,9 +1,10 @@
 [gd_scene format=3 uid="uid://cyfvcuxi210mg"]
 
+[ext_resource type="Script" uid="uid://bp6dajvjaofem" path="res://levels/abstract_level.gd" id="1_c78cs"]
 [ext_resource type="Texture2D" uid="uid://b4yku5r5gwktv" path="res://assets/tiles/light.png" id="1_ilwad"]
 [ext_resource type="Texture2D" uid="uid://bumhnws1m7wro" path="res://assets/tiles/dark.png" id="2_0vhbo"]
 [ext_resource type="Texture2D" uid="uid://bta4h2svhcjry" path="res://assets/tiles/fog.png" id="3_ldao0"]
-[ext_resource type="PackedScene" uid="uid://d1pqg0iqd34e" path="res://levels/tile_entity/portal.tscn" id="4_55n5f"]
+[ext_resource type="PackedScene" uid="uid://d1pqg0iqd34e" path="res://entities/tile_entity/portal.tscn" id="4_55n5f"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ilwad"]
 texture = ExtResource("1_ilwad")
@@ -38,6 +39,7 @@ sources/3 = SubResource("TileSetAtlasSource_55n5f")
 sources/4 = SubResource("TileSetScenesCollectionSource_wg11f")
 
 [node name="AbstractLevel" type="Node2D" unique_id=226412309]
+script = ExtResource("1_c78cs")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=502832762]
 tile_set = SubResource("TileSet_ldao0")

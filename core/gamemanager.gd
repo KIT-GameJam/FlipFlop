@@ -127,3 +127,6 @@ func _quit_game() -> void:
 
 func set_world_environment(env: Environment):
 	$WorldEnvironment.environment = env
+	
+func change_scene(level: AbstractLevel.Level, entrance: LevelEntrance.Entrance):
+	pass
