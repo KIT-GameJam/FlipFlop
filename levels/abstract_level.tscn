@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://cyfvcuxi210mg"]
+
+[ext_resource type="Texture2D" uid="uid://b4yku5r5gwktv" path="res://assets/tiles/light.png" id="1_ilwad"]
+[ext_resource type="Texture2D" uid="uid://bumhnws1m7wro" path="res://assets/tiles/dark.png" id="2_0vhbo"]
+[ext_resource type="Texture2D" uid="uid://bta4h2svhcjry" path="res://assets/tiles/fog.png" id="3_ldao0"]
+[ext_resource type="PackedScene" uid="uid://d1pqg0iqd34e" path="res://levels/tile_entity/portal.tscn" id="4_55n5f"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ilwad"]
+texture = ExtResource("1_ilwad")
+texture_region_size = Vector2i(40, 40)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-20, -20, 20, -20, 20, 20, -20, 20)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ldao0"]
+texture = ExtResource("2_0vhbo")
+texture_region_size = Vector2i(40, 40)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_55n5f"]
+texture = ExtResource("3_ldao0")
+texture_region_size = Vector2i(40, 40)
+0:0/0 = 0
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_wg11f"]
+resource_name = "portal"
+scenes/1/scene = ExtResource("4_55n5f")
+
+[sub_resource type="TileSet" id="TileSet_ldao0"]
+tile_size = Vector2i(40, 40)
+physics_layer_0/collision_layer = 2
+physics_layer_0/collision_mask = 2
+physics_layer_1/collision_layer = 4
+physics_layer_1/collision_mask = 4
+sources/1 = SubResource("TileSetAtlasSource_ilwad")
+sources/2 = SubResource("TileSetAtlasSource_ldao0")
+sources/3 = SubResource("TileSetAtlasSource_55n5f")
+sources/4 = SubResource("TileSetScenesCollectionSource_wg11f")
+
+[node name="AbstractLevel" type="Node2D" unique_id=226412309]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=502832762]
+tile_set = SubResource("TileSet_ldao0")
