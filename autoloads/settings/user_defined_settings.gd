@@ -161,7 +161,7 @@ func _set_aa_mode_2d(mode_string: String):
 
 func _set_audio_bus_volume(volume: float, bus: AudioBus):
 	volume /= 100.0
-    volume = volume*volume # Quadratic curve for better control on low end
+	volume = volume*volume # Quadratic curve for better control on low end
 	match bus:
 		AudioBus.MASTER: AudioServer.set_bus_volume_linear(AudioServer.get_bus_index("Master"), volume)
 		AudioBus.MUSIC: AudioServer.set_bus_volume_linear(AudioServer.get_bus_index("Music"), volume)
