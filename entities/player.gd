@@ -14,41 +14,29 @@ func _ready():
 	sprite.modulate = Color.BLACK
 
 func flip() -> void:
-	if flipped:
-		_flip_up()
-	else: 
-		_flip_down()
+	_perform_flip(not flipped)
 
 func is_on_ground() -> bool:
 	return (is_on_ceiling() if flipped else is_on_floor())
 
-func _flip_up() -> void:
-	var target_collision_position := Vector2(0, -35)
-	set_collision_mask_value(3, true)
-	set_collision_mask_value(2, false)
+func _perform_flip(to_flipped: bool) -> void:
+	var target_collision_position := Vector2(0, 35 if to_flipped else -35)
+	var mask_to_enable := 2 if to_flipped else 3
+	var mask_to_disable := 3 if to_flipped else 2
+	
+	set_collision_mask_value(mask_to_enable, true)
+	set_collision_mask_value(mask_to_disable, false)
+	
 	if not _can_flip_to(target_collision_position):
-		set_collision_mask_value(2, true)
-		set_collision_mask_value(3, false)
+		set_collision_mask_value(mask_to_disable, true)
+		set_collision_mask_value(mask_to_enable, false)
 		_fail_flip()
 		return
+		
 	collision_shape.position = target_collision_position
-	animation_player.play("flip_up")
+	animation_player.play("flip_down" if to_flipped else "flip_up")
 	in_flipping_animation = true
-	flipped = false
-
-func _flip_down() -> void:
-	var target_collision_position := Vector2(0, 35)
-	set_collision_mask_value(2, true)
-	set_collision_mask_value(3, false)
-	if not _can_flip_to(target_collision_position):
-		set_collision_mask_value(3, true)
-		set_collision_mask_value(2, false)
-		_fail_flip()
-		return
-	collision_shape.position = target_collision_position
-	animation_player.play("flip_down")
-	in_flipping_animation = true
-	flipped = true
+	flipped = to_flipped
 
 func _can_flip_to(target_collision_position: Vector2) -> bool:
 	var original_collision_position := collision_shape.position
@@ -58,10 +46,7 @@ func _can_flip_to(target_collision_position: Vector2) -> bool:
 	return not is_blocked
 
 func _fail_flip():
-	if flipped:
-		animation_player.play("flipflop_up")
-	else:
-		animation_player.play("flipflop_down")
+	animation_player.play("flipflop_up" if flipped else "flipflop_down")
 
 func _get_flipped_integer() -> int:
 	return 1 if flipped else -1
