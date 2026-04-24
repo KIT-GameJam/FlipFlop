@@ -13,7 +13,7 @@ func _register_settings() -> void:
 
 func _register_graphics_settings() -> void:
 	var graphics_category = Settings.SettingCategory.new("graphics", "Graphics")
-	
+
 	var display_mode_options: Array[String] = ["Fullscreen", "Windowed Fullscreen", "Windowed"]
 	var display_mode_setting = Settings.OptionSetting.new("display_mode",
 														"Display Mode",
@@ -21,10 +21,10 @@ func _register_graphics_settings() -> void:
 														display_mode_options,
 														_set_display_mode)
 	graphics_category.add_setting(display_mode_setting)
-	
+
 	var vsync_enabled_setting = Settings.BoolSetting.new("vsync_enabled", "VSync enabled", true, _set_vsync_enabled)
 	graphics_category.add_setting(vsync_enabled_setting)
-	
+
 	var aa_3d_options: Array[String] = ["Disabled", "FXAA", "TAA", "MSAA 2x", "MSAA 4x", "FSR 2"]
 	var aa_3d_setting = Settings.OptionSetting.new("3d_aa_mode",
 													"3D Anti-Aliasing Mode",
@@ -32,7 +32,7 @@ func _register_graphics_settings() -> void:
 													aa_3d_options,
 													_set_aa_mode_3d)
 	graphics_category.add_setting(aa_3d_setting)
-	
+
 	# 2D MSAA is not yet available in the Compatibility renderer
 	if (ProjectSettings.get_setting_with_override("rendering/renderer/rendering_method") != "gl_compatibility"):
 		var aa_2d_options: Array[String] = ["Disabled", "MSAA 2x", "MSAA 4x", "MSAA 8x"]
@@ -42,12 +42,12 @@ func _register_graphics_settings() -> void:
 														aa_2d_options,
 														_set_aa_mode_2d)
 		graphics_category.add_setting(aa_2d_setting)
-	
+
 	Settings.add_root_category(graphics_category)
 
 func _register_audio_settings() -> void:
 	var audio_category = Settings.SettingCategory.new("audio", "Audio")
-	
+
 	var master_volume_setting = Settings.FloatSetting.new("volume_master",
 														  "Master Volume",
 														  100.0,
@@ -56,10 +56,10 @@ func _register_audio_settings() -> void:
 														  1.0,
 														  func(volume): _set_audio_bus_volume(volume, AudioBus.MASTER))
 	audio_category.add_setting(master_volume_setting)
-	
+
 	# Fine Control subcategory for audio
 	var fine_control_category = Settings.SettingCategory.new("fine_control", "Fine Control")
-	
+
 	var music_volume_setting = Settings.FloatSetting.new("volume_music",
 														 "Volume (Music)",
 														 100.0,
@@ -68,7 +68,7 @@ func _register_audio_settings() -> void:
 														 1.0,
 														 func(volume): _set_audio_bus_volume(volume, AudioBus.MUSIC))
 	fine_control_category.add_setting(music_volume_setting)
-	
+
 	var sfx_volume_setting = Settings.FloatSetting.new("volume_sfx",
 													   "Volume (SFX)",
 													   100.0,
@@ -77,7 +77,7 @@ func _register_audio_settings() -> void:
 													   1.0,
 													   func(volume): _set_audio_bus_volume(volume, AudioBus.SFX))
 	fine_control_category.add_setting(sfx_volume_setting)
-	
+
 	var voice_volume_setting = Settings.FloatSetting.new("volume_voice",
 														 "Volume (Voice)",
 														 100.0,
@@ -86,14 +86,14 @@ func _register_audio_settings() -> void:
 														 1.0,
 														 func(volume): _set_audio_bus_volume(volume, AudioBus.VOICE))
 	fine_control_category.add_setting(voice_volume_setting)
-	
+
 	audio_category.add_sub_category(fine_control_category)
-	
+
 	Settings.add_root_category(audio_category)
 
 func _register_controls_settings() -> void:
 	var controls_category = Settings.SettingCategory.new("controls", "Controls")
-	
+
 	var mouse_sensitivity_setting = Settings.FloatSetting.new("mouse_sensitivity",
 															  "Mouse Sensitivity",
 															  1.0,
@@ -101,17 +101,17 @@ func _register_controls_settings() -> void:
 															  1.9,
 															  0.01)
 	controls_category.add_setting(mouse_sensitivity_setting)
-	
+
 	var key_bindings_category = Settings.SettingCategory.new("key_bindings", "Key Bindings")
-	
+
 	# Insert remappable actions
-	_create_action_setting(key_bindings_category, "move_up", "Move Forward")
-	_create_action_setting(key_bindings_category, "move_down", "Move Backward")
 	_create_action_setting(key_bindings_category, "move_left", "Move Left")
 	_create_action_setting(key_bindings_category, "move_right", "Move Right")
-	
+	_create_action_setting(key_bindings_category, "jump", "Jump")
+	_create_action_setting(key_bindings_category, "flip", "Flip")
+
 	controls_category.add_sub_category(key_bindings_category)
-	
+
 	Settings.add_root_category(controls_category)
 
 
@@ -192,5 +192,5 @@ func _set_input_events(events: Array[InputEvent], action: String) -> void:
 	for event in events:
 		if event:
 			InputMap.action_add_event(action, event)
- 
+
 #endregion
