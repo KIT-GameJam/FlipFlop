@@ -37,6 +37,7 @@ window/stretch/mode="canvas_items"
 [file_customization]
 
 folder_colors={
+"res://assets/": "yellow",
 "res://autoloads/": "gray",
 "res://core/": "red",
 "res://levels/": "blue",
