@@ -15,7 +15,7 @@ const SFX := {
 
 @onready var hit_box_vertical: CollisionShape2D = $HitBoxVertical/CollisionShape2D
 @onready var hit_box_horizontal: CollisionShape2D = $HitBoxHorizontal/CollisionShape2D
-@onready var sprite: AnimatedSprite2D = $Sprite2D
+@onready var sprite: AnimatedSprite2D = $Sprite
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var player_sfx_player: AudioStreamPlayer2D = $PlayerSfxPlayer
@@ -179,8 +179,14 @@ func _update_animations() -> void:
 			if player_sfx_player.stream == SFX.walking:
 				player_sfx_player.stop_sfx()
 	else:
-		if sprite.animation != "idle":
-			sprite.play("idle")
+		var vertical_velocity := velocity.y * (-1 if flipped else 1)
+		if vertical_velocity < 0:
+			if sprite.animation != "jumping":
+				sprite.play("jumping")
+		else:
+			if sprite.animation != "falling":
+				sprite.play("falling")
+
 		if player_sfx_player.stream == SFX.walking:
 			player_sfx_player.stop_sfx()
 
