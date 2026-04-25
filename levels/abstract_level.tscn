@@ -33,6 +33,7 @@ physics_layer_3/collision_mask = 16
 sources/0 = SubResource("TileSetAtlasSource_1u8rv")
 
 [node name="AbstractLevel" type="Node2D" unique_id=226412309]
+process_mode = 1
 script = ExtResource("1_c78cs")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=502832762]

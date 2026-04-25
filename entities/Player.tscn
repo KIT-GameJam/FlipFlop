@@ -249,6 +249,7 @@ _data = {
 }
 
 [node name="Player" type="CharacterBody2D" unique_id=1281984372]
+process_mode = 1
 z_index = 1
 collision_layer = 8
 collision_mask = 12
