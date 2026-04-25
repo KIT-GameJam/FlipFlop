@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b54suilbngo83" path="res://entities/player.gd" id="1_eh0f6"]
 [ext_resource type="Texture2D" uid="uid://dlx1diwsab5id" path="res://assets/entities/player/Player-Sheet.png" id="2_ojs4q"]
-[ext_resource type="AudioStream" uid="uid://cvg7tpbu14jdg" path="res://assets/sfx/walking.mp3" id="3_lw5ub"]
+[ext_resource type="Script" uid="uid://sohsw0pm1htw" path="res://entities/player_sfx_player.gd" id="3_lw5ub"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lw5ub"]
 size = Vector2(20, 80)
@@ -289,9 +289,9 @@ autoplay = "idle"
 libraries/ = SubResource("AnimationLibrary_l1ths")
 speed_scale = 2.0
 
-[node name="WalkingPlayer" type="AudioStreamPlayer2D" parent="." unique_id=554413362]
-stream = ExtResource("3_lw5ub")
+[node name="PlayerSfxPlayer" type="AudioStreamPlayer2D" parent="." unique_id=554413362]
 bus = &"SFX"
+script = ExtResource("3_lw5ub")
 
 [connection signal="body_entered" from="HitBoxVertical" to="." method="_on_kill_body_entered"]
 [connection signal="body_entered" from="HitBoxHorizontal" to="." method="_on_kill_body_entered"]

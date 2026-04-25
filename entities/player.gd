@@ -7,13 +7,18 @@ const COYOTE_TIME: float = 0.1
 const LAYER_LIGHT := 2
 const LAYER_DARK := 3
 
+const SFX := {
+	"walking": preload("res://assets/sfx/walking.mp3"),
+	"jumping": preload("res://assets/sfx/jumping.mp3")
+}
+
 @onready var hit_box: CollisionShape2D = $HitBoxHorizontal/CollisionShape2D
 @onready var hit_box_vertical: CollisionShape2D = $HitBoxVertical/CollisionShape2D
 @onready var hit_box_horizontal: CollisionShape2D = $HitBoxHorizontal/CollisionShape2D
 @onready var sprite: AnimatedSprite2D = $Sprite2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
-@onready var walking_player: AudioStreamPlayer2D = $WalkingPlayer
+@onready var player_sfx_player: AudioStreamPlayer2D = $PlayerSfxPlayer
 
 @onready var flipped: bool = false
 @onready var in_flipping_animation: bool = false
@@ -144,14 +149,12 @@ func _update_walking_animation(direction: float) -> void:
 		
 	if sprite.animation != "walking":
 		sprite.play("walking")
-	if not walking_player.playing:
-		walking_player.play()
+	player_sfx_player.play_sfx(SFX.walking)
 
 func _stop_walking() -> void:
 	if sprite.animation != "idle":
 		sprite.play("idle")
-	if walking_player.playing:
-		walking_player.stop()
+	player_sfx_player.stop_sfx()
 
 func _walk_left() -> void:
 	sprite.scale.x = -1
@@ -161,7 +164,6 @@ func _walk_right() -> void:
 
 func _on_animation_player_animation_finished(_anim_name: StringName) -> void:
 	in_flipping_animation = false
-
 
 func _on_kill_body_entered(body: Node2D) -> void:
 	if body is TileMapLayer:
