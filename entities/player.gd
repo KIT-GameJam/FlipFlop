@@ -64,18 +64,19 @@ func _physics_process(delta: float) -> void:
 	else:
 		coyote_timer -= delta
 
-	# Add the gravity.
-	if not on_ground:
-		velocity += get_gravity() * delta * (-1 if flipped else 1)
-
-	if Input.is_action_just_pressed("jump") and coyote_timer > 0:
-		velocity.y = JUMP_VELOCITY * (-1 if flipped else 1)
-		coyote_timer = 0
-	elif Input.is_action_just_pressed("flip") and coyote_timer > 0:
+	if Input.is_action_just_pressed("flip") and coyote_timer > 0:
 		flip()
 		coyote_timer = 0
 
 	if not in_flipping_animation:
+		# Add the gravity.
+		if not on_ground and not in_flipping_animation:
+			velocity += get_gravity() * delta * (-1 if flipped else 1)
+
+		if Input.is_action_just_pressed("jump") and coyote_timer > 0:
+			velocity.y = JUMP_VELOCITY * (-1 if flipped else 1)
+			coyote_timer = 0
+
 		var direction := Input.get_axis("move_left", "move_right")
 		if direction:
 			velocity.x = direction * SPEED
