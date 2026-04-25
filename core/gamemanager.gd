@@ -80,6 +80,7 @@ func _show_main_level() -> void:
 
 func change_level(new_level: AbstractLevel.Level, entrance: int) -> void:
 	# disable player collision to prevent interactions with new level
+	player.hit_box.set_deferred("disabled", true)
 	var collision_layer := player.collision_layer
 	player.collision_layer = 0
 	var collision_mask := player.collision_mask
@@ -87,16 +88,18 @@ func change_level(new_level: AbstractLevel.Level, entrance: int) -> void:
 
 	if new_level != current_level or current_level_node == null:
 		if current_level_node != null:
-			remove_child(current_level_node)
-		current_level_node = loaded_levels[new_level]
-		add_child(current_level_node)
-	player.position = loaded_levels[new_level].entrances[entrance]
+			remove_child.call_deferred(current_level_node)
+		current_level = new_level
+		current_level_node = loaded_levels[current_level]
+		add_child.call_deferred(current_level_node)
+	await get_tree().process_frame
+	player.position = current_level_node.entrances[entrance]
 
 	# wait for one frame before enabling collision again
 	await get_tree().process_frame
+	player.hit_box.disabled = false
 	player.collision_layer = collision_layer
 	player.collision_mask = collision_mask
-	# current_level = new_level
 
 
 #endregion

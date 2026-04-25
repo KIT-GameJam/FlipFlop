@@ -1,6 +1,7 @@
 class_name Player
 extends CharacterBody2D
 
+@onready var hit_box: CollisionShape2D = $HitBox/CollisionShape2D
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
