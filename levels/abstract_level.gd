@@ -14,6 +14,8 @@ enum Level {
 	PathOfPain,
 }
 
+@onready var tile_map_layer: TileMapLayer = $TileMapLayer
+
 var entrances: Array[LevelEntrance] = []
 
 func _ready() -> void:
