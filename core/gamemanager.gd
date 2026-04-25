@@ -89,7 +89,8 @@ func _show_main_level() -> void:
 
 func change_level(new_level: AbstractLevel.Level, entrance: int) -> void:
 	# disable player collision to prevent interactions with new level
-	player.hit_box.set_deferred("disabled", true)
+	player.hit_box_vertical.set_deferred("disabled", true)
+	player.hit_box_horizontal.set_deferred("disabled", true)
 	var collision_layer := player.collision_layer
 	player.collision_layer = 0
 	var collision_mask := player.collision_mask
@@ -106,7 +107,8 @@ func change_level(new_level: AbstractLevel.Level, entrance: int) -> void:
 	var entrance_node := current_level_node.entrances[entrance]
 	player.position = entrance_node.position
 
-	player.hit_box.disabled = false
+	player.hit_box_vertical.disabled = false
+	player.hit_box_horizontal.disabled = false
 	player.collision_layer = collision_layer
 	player.collision_mask = collision_mask
 	player.set_flipped(entrance_node.flipped)

@@ -4,8 +4,11 @@
 [ext_resource type="Texture2D" uid="uid://dlx1diwsab5id" path="res://assets/entities/player/Player-Sheet.png" id="2_ojs4q"]
 [ext_resource type="AudioStream" uid="uid://cvg7tpbu14jdg" path="res://assets/sfx/walking.mp3" id="3_lw5ub"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ojs4q"]
-height = 80.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lw5ub"]
+size = Vector2(20, 80)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ks8m5"]
+size = Vector2(40, 60)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_eh0f6"]
 radius = 15.0
@@ -256,13 +259,21 @@ collision_layer = 8
 collision_mask = 12
 script = ExtResource("1_eh0f6")
 
-[node name="HitBox" type="Area2D" parent="." unique_id=2120278500]
+[node name="HitBoxVertical" type="Area2D" parent="." unique_id=2120278500]
 collision_layer = 16
 collision_mask = 16
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=94176873]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxVertical" unique_id=94176873]
 position = Vector2(0, -35)
-shape = SubResource("CapsuleShape2D_ojs4q")
+shape = SubResource("RectangleShape2D_lw5ub")
+
+[node name="HitBoxHorizontal" type="Area2D" parent="." unique_id=2078482395]
+collision_layer = 32
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxHorizontal" unique_id=327579059]
+position = Vector2(0, -35)
+shape = SubResource("RectangleShape2D_ks8m5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1080355892]
 position = Vector2(0, -35)
@@ -281,5 +292,6 @@ speed_scale = 2.0
 [node name="WalkingPlayer" type="AudioStreamPlayer2D" parent="." unique_id=554413362]
 stream = ExtResource("3_lw5ub")
 
-[connection signal="body_entered" from="HitBox" to="." method="_on_kill_body_entered"]
+[connection signal="body_entered" from="HitBoxVertical" to="." method="_on_kill_body_entered"]
+[connection signal="body_entered" from="HitBoxHorizontal" to="." method="_on_kill_body_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

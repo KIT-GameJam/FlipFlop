@@ -94,7 +94,8 @@ reset={
 2d_physics/layer_2="Light"
 2d_physics/layer_3="Dark"
 2d_physics/layer_4="Player"
-2d_physics/layer_5="Kill"
+2d_physics/layer_5="Kill Vertical"
+2d_physics/layer_6="Kill Horizontal"
 
 [rendering]
 

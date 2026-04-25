@@ -1,7 +1,8 @@
 class_name Player
 extends CharacterBody2D
 
-@onready var hit_box: CollisionShape2D = $HitBox/CollisionShape2D
+@onready var hit_box_vertical: CollisionShape2D = $HitBoxVertical/CollisionShape2D
+@onready var hit_box_horizontal: CollisionShape2D = $HitBoxHorizontal/CollisionShape2D
 @onready var sprite: AnimatedSprite2D = $Sprite2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
@@ -33,7 +34,8 @@ func set_flipped(to_flipped: bool) -> void:
 		set_collision_mask_value(LAYER_LIGHT, not get_collision_mask_value(LAYER_LIGHT))
 		set_collision_mask_value(LAYER_DARK, not get_collision_mask_value(LAYER_DARK))
 		collision_shape.position.y *= -1
-		hit_box.position.y *= -1
+		hit_box_vertical.position.y *= -1
+		hit_box_horizontal.position.y *= -1
 		sprite.position.y *= -1
 		sprite.scale.y *= -1
 		sprite.modulate = sprite.modulate.inverted()
@@ -56,7 +58,8 @@ func _perform_flip(to_flipped: bool) -> void:
 
 	global_position.x += correction_offset.x
 	collision_shape.position = target_collision_position
-	hit_box.position = target_collision_position
+	hit_box_vertical.position = target_collision_position
+	hit_box_horizontal.position = target_collision_position
 	animation_player.play(&"flip_down" if to_flipped else &"flip_up")
 	in_flipping_animation = true
 	flipped = to_flipped
@@ -64,12 +67,12 @@ func _perform_flip(to_flipped: bool) -> void:
 func _get_flip_correction(target_collision_position: Vector2) -> Variant:
 	var original_collision_position := collision_shape.position
 	collision_shape.position = target_collision_position
-	
+
 	# Try direct flip first
 	if not test_move(global_transform, Vector2(0, _get_flipped_integer() * -1), null, 2, true):
 		collision_shape.position = original_collision_position
 		return Vector2.ZERO
-	
+
 	# Try horizontal corrections
 	var max_correction := 15.0
 	var steps := 15
@@ -81,7 +84,7 @@ func _get_flip_correction(target_collision_position: Vector2) -> Variant:
 			if not test_move(test_transform, Vector2(0, _get_flipped_integer() * -1), null, 2, true):
 				collision_shape.position = original_collision_position
 				return Vector2(offset_val, 0)
-				
+
 	collision_shape.position = original_collision_position
 	return null
 
