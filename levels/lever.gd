@@ -3,6 +3,8 @@ extends Area2D
 
 @export var toggle_blocks: Array[Vector2i]
 
+var toggled := false
+
 const TILE_MAPPING: Dictionary[Array, Array] = {
 	[0, Vector2i(0, 0)]: [0, Vector2i(0, 1)],
 	[0, Vector2i(0, 1)]: [0, Vector2i(0, 0)],
@@ -20,3 +22,8 @@ func toggle() -> void:
 		var mapping = TILE_MAPPING.get([source_id, atlas_coords])
 		if mapping:
 			tile_map.set_cell(block, mapping[0], mapping[1])
+	toggled = not toggled
+
+func reset() -> void:
+	if toggled:
+		toggle()

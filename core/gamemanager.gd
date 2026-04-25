@@ -20,6 +20,8 @@ const LEVELS: Dictionary[AbstractLevel.Level, PackedScene] = {
 	AbstractLevel.Level.Spikes: preload("res://levels/level_spikes.tscn"),
 	AbstractLevel.Level.Clouds: preload("res://levels/level_clouds.tscn"),
 	AbstractLevel.Level.PathOfPain: preload("res://levels/level_path_of_pain.tscn"),
+	AbstractLevel.Level.LeverIntro: preload("res://levels/level_lever_intro.tscn"),
+	AbstractLevel.Level.Lever: preload("res://levels/level_lever.tscn"),
 }
 var loaded_levels: Dictionary[AbstractLevel.Level, AbstractLevel] = {}
 
@@ -117,6 +119,8 @@ func change_level(new_level: AbstractLevel.Level, entrance: int) -> void:
 
 func respawn() -> void:
 	player.velocity = Vector2.ZERO
+	for lever in current_level_node.levers:
+		lever.reset()
 	change_level(current_level, last_entrance)
 
 #endregion

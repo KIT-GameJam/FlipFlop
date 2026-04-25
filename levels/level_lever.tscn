@@ -15,7 +15,7 @@ position = Vector2(660, 480)
 
 [node name="Lever" parent="." index="2" unique_id=2106870502 instance=ExtResource("3_l3r21")]
 position = Vector2(660, 400)
-toggle_blocks = Array[Vector2i]([Vector2i(14, 7), Vector2i(14, 8), Vector2i(14, 9), Vector2i(14, 10), Vector2i(14, 11), Vector2i(14, 12), Vector2i(10, 8), Vector2i(10, 9), Vector2i(10, 10), Vector2i(10, 11), Vector2i(10, 12)])
+toggle_blocks = Array[Vector2i]([Vector2i(14, 7), Vector2i(14, 8), Vector2i(14, 9), Vector2i(14, 10), Vector2i(14, 11), Vector2i(14, 12), Vector2i(10, 7), Vector2i(10, 8), Vector2i(10, 9), Vector2i(10, 10), Vector2i(10, 11), Vector2i(10, 12)])
 
 [node name="LevelEntrance" parent="." index="3" unique_id=46011893 instance=ExtResource("4_6xere")]
 position = Vector2(460, 520)
