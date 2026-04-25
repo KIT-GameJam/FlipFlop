@@ -17,7 +17,7 @@ position = Vector2(1043, 128)
 level = 1
 
 [node name="Top Entrance" parent="." index="3" unique_id=1609134150 instance=ExtResource("2_8iw4i")]
-position = Vector2(23, 147)
+position = Vector2(19, 154)
 
 [node name="PortaltoTop" parent="." index="4" unique_id=1788779211 instance=ExtResource("3_jqiq6")]
 position = Vector2(1276, 544)
