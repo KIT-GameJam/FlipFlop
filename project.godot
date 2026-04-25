@@ -19,7 +19,7 @@ config/icon="res://icon.svg"
 
 [audio]
 
-buses/default_bus_layout="res://core/default_bus_layout.tres"
+buses/default_bus_layout="uid://cxjrus2g7oh0t"
 
 [autoload]
 
@@ -33,7 +33,6 @@ Settings="*res://autoloads/settings/settings.gd"
 window/size/viewport_width=1280
 window/size/viewport_height=720
 window/stretch/mode="canvas_items"
-window/stretch/aspect="keep_width"
 
 [file_customization]
 

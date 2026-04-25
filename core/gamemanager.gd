@@ -8,6 +8,7 @@ class_name GameManager
 
 @onready var pause_menu: Control = %PauseMenu
 @onready var menu_layer: CanvasLayer = %MenuLayer
+@onready var sfx_stream_player: AudioStreamPlayer = $SFXStreamPlayer
 
 const LEVELS: Dictionary[AbstractLevel.Level, PackedScene] = {
 	AbstractLevel.Level.Start: preload("res://levels/level_start.tscn"),
@@ -112,6 +113,7 @@ func change_level(new_level: AbstractLevel.Level, entrance: int) -> void:
 	player.collision_layer = collision_layer
 	player.collision_mask = collision_mask
 	player.set_flipped(entrance_node.flipped)
+	sfx_stream_player.play()
 
 func respawn() -> void:
 	player.velocity = Vector2.ZERO

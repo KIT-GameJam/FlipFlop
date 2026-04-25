@@ -5,6 +5,7 @@
 [ext_resource type="Environment" uid="uid://bhb4ckqipjvu3" path="res://core/main_environment.tres" id="2_v1n10"]
 [ext_resource type="Theme" uid="uid://hheneshfv1b2" path="res://ui/themes/your_theme.tres" id="3_8qpx4"]
 [ext_resource type="AudioStream" uid="uid://crmh5p5v83bh2" path="res://assets/music/background.mp3" id="3_t557q"]
+[ext_resource type="AudioStream" uid="uid://8w6djbbnbvft" path="res://assets/sfx/portal.mp3" id="4_xlp76"]
 
 [node name="Gamemanager" type="Node" unique_id=1050225795]
 process_mode = 3
@@ -13,11 +14,15 @@ script = ExtResource("1_htktm")
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=224925465]
 environment = ExtResource("2_v1n10")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=544983326]
+[node name="MusicStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=544983326]
 stream = ExtResource("3_t557q")
 volume_db = -5.0
 autoplay = true
 bus = &"Music"
+
+[node name="SFXStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1895702388]
+stream = ExtResource("4_xlp76")
+bus = &"SFX"
 
 [node name="MenuLayer" type="CanvasLayer" parent="." unique_id=1393391734]
 unique_name_in_owner = true

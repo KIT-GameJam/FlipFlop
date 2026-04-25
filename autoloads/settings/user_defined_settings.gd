@@ -78,15 +78,6 @@ func _register_audio_settings() -> void:
 													   func(volume): _set_audio_bus_volume(volume, AudioBus.SFX))
 	fine_control_category.add_setting(sfx_volume_setting)
 
-	var voice_volume_setting = Settings.FloatSetting.new("volume_voice",
-														 "Volume (Voice)",
-														 100.0,
-														 0.0,
-														 150.0,
-														 1.0,
-														 func(volume): _set_audio_bus_volume(volume, AudioBus.VOICE))
-	fine_control_category.add_setting(voice_volume_setting)
-
 	audio_category.add_sub_category(fine_control_category)
 
 	Settings.add_root_category(audio_category)
