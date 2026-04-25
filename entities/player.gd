@@ -116,4 +116,4 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 
 func _on_kill_body_entered(body: Node2D) -> void:
 	if body is TileMapLayer:
-		print("kill")
+		Global.game_manager.respawn()

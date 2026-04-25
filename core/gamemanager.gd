@@ -21,6 +21,7 @@ var loaded_levels: Dictionary[AbstractLevel.Level, AbstractLevel] = {}
 
 var current_level: AbstractLevel.Level
 var current_level_node: AbstractLevel
+var last_entrance := 0
 
 const PlayerScene = preload("res://entities/Player.tscn")
 var player: Player
@@ -98,6 +99,7 @@ func change_level(new_level: AbstractLevel.Level, entrance: int) -> void:
 		current_level_node = loaded_levels[current_level]
 		add_child.call_deferred(current_level_node)
 	await get_tree().process_frame
+	last_entrance = entrance
 	player.position = current_level_node.entrances[entrance]
 
 	# wait for one frame before enabling collision again
@@ -106,6 +108,8 @@ func change_level(new_level: AbstractLevel.Level, entrance: int) -> void:
 	player.collision_layer = collision_layer
 	player.collision_mask = collision_mask
 
+func respawn() -> void:
+	change_level(current_level, last_entrance)
 
 #endregion
 
