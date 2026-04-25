@@ -153,7 +153,7 @@ func _show_controls() -> void:
 	var actions: PackedStringArray = PackedStringArray()
 	for action in ["move_left", "move_right", "jump", "flip", "reset", "interact"]:
 		var setting := Settings._get_setting_by_path("controls/key_bindings/action_map_" + action)
-		var events: Array[InputEvent] = setting.value
+		var events: Array[InputEvent] = setting.value.filter(func (event): return event != null)
 		actions.append(setting.display_text + ": " + " / ".join(events.map(func (event): return event.as_text().trim_suffix(" - Physical"))))
 	controls.set_text("\n".join(actions))
 
