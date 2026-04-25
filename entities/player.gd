@@ -9,7 +9,8 @@ const LAYER_DARK := 3
 
 const SFX := {
 	"walking": preload("res://assets/sfx/walking.mp3"),
-	"jumping": preload("res://assets/sfx/jumping.mp3")
+	"jumping": preload("res://assets/sfx/jumping.mp3"),
+	"landing": preload("res://assets/sfx/landing.mp3")
 }
 
 @onready var hit_box: CollisionShape2D = $HitBoxHorizontal/CollisionShape2D
@@ -147,16 +148,14 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
-func _update_walking_animation(direction: float) -> void:
-	if not is_on_ground():
-		_stop_walking()
-		return
-	
+func _update_walking_animation(direction: float) -> void:	
 	if direction > 0:
 		_walk_right()
 	else:
 		_walk_left()
-		
+	if not is_on_ground():
+		_stop_walking()
+		return
 	if sprite.animation != "walking":
 		sprite.play("walking")
 	player_sfx_player.play_sfx(SFX.walking)
