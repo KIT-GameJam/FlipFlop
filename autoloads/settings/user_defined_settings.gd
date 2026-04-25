@@ -109,6 +109,8 @@ func _register_controls_settings() -> void:
 	_create_action_setting(key_bindings_category, "move_right", "Move Right")
 	_create_action_setting(key_bindings_category, "jump", "Jump")
 	_create_action_setting(key_bindings_category, "flip", "Flip")
+	_create_action_setting(key_bindings_category, "reset", "Reset")
+	_create_action_setting(key_bindings_category, "interact", "Interact")
 
 	controls_category.add_sub_category(key_bindings_category)
 

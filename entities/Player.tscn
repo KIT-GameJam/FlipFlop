@@ -275,6 +275,12 @@ collision_mask = 32
 position = Vector2(0, -35)
 shape = SubResource("RectangleShape2D_ks8m5")
 
+[node name="LeverArea" type="Area2D" parent="." unique_id=195362945]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeverArea" unique_id=1808146002]
+position = Vector2(0, -35)
+shape = SubResource("CapsuleShape2D_eh0f6")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1080355892]
 position = Vector2(0, -35)
 shape = SubResource("CapsuleShape2D_eh0f6")
@@ -295,4 +301,6 @@ script = ExtResource("3_lw5ub")
 
 [connection signal="body_entered" from="HitBoxVertical" to="." method="_on_kill_body_entered"]
 [connection signal="body_entered" from="HitBoxHorizontal" to="." method="_on_kill_body_entered"]
+[connection signal="area_entered" from="LeverArea" to="." method="_on_lever_area_entered"]
+[connection signal="area_exited" from="LeverArea" to="." method="_on_lever_area_exited"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

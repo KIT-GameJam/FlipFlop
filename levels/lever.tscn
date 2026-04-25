@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://syr77ofup15a"]
+
+[ext_resource type="Script" uid="uid://clyecj115hq3o" path="res://levels/lever.gd" id="1_uw28k"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1oc7w"]
+
+[node name="Lever" type="Area2D" unique_id=2106870502]
+script = ExtResource("1_uw28k")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=547463906]
+shape = SubResource("CircleShape2D_1oc7w")

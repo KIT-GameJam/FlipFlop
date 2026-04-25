@@ -26,6 +26,8 @@ const SFX := {
 var last_direction: float = 0.0
 var coyote_timer: float = 0.0
 
+var close_levers: Array[Lever] = []
+
 func _ready():
 	sprite.modulate = Color.BLACK
 
@@ -98,7 +100,7 @@ func _can_flip_to(target_collision_position: Vector2) -> bool:
 	return _get_flip_correction(target_collision_position) != null
 
 func _fail_flip():
-	animation_player.play("flipflop_up" if flipped else "flipflop_down")
+	animation_player.play(&"flipflop_up" if flipped else &"flipflop_down")
 	in_flipping_animation = true
 
 func _get_flipped_integer() -> int:
@@ -112,7 +114,7 @@ func _physics_process(delta: float) -> void:
 	else:
 		coyote_timer -= delta
 
-	if Input.is_action_just_pressed("flip") and coyote_timer > 0:
+	if Input.is_action_just_pressed(&"flip") and coyote_timer > 0:
 		flip()
 		coyote_timer = 0
 
@@ -121,11 +123,14 @@ func _physics_process(delta: float) -> void:
 		if not on_ground and not in_flipping_animation:
 			velocity += get_gravity() * delta * (-1 if flipped else 1)
 
-		if Input.is_action_just_pressed("jump") and coyote_timer > 0:
+		if Input.is_action_just_pressed(&"jump") and coyote_timer > 0:
 			velocity.y = JUMP_VELOCITY * (-1 if flipped else 1)
 			coyote_timer = 0
-		elif Input.is_action_just_pressed("reset"):
+		elif Input.is_action_just_pressed(&"reset"):
 			Global.game_manager.respawn()
+		elif Input.is_action_just_pressed(&"interact"):
+			for lever in close_levers:
+				lever.toggle()
 
 		var direction := Input.get_axis("move_left", "move_right")
 		if direction:
@@ -168,3 +173,12 @@ func _on_animation_player_animation_finished(_anim_name: StringName) -> void:
 func _on_kill_body_entered(body: Node2D) -> void:
 	if body is TileMapLayer:
 		Global.game_manager.respawn()
+
+
+func _on_lever_area_entered(area: Area2D) -> void:
+	if area is Lever:
+		close_levers.append(area)
+
+func _on_lever_area_exited(area: Area2D) -> void:
+	if area is Lever:
+		close_levers.erase(area)
