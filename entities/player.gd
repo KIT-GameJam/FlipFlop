@@ -2,12 +2,12 @@ class_name Player
 extends CharacterBody2D
 
 @onready var hit_box: CollisionShape2D = $HitBox/CollisionShape2D
-@onready var sprite: Sprite2D = $Sprite2D
+@onready var sprite: AnimatedSprite2D = $Sprite2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var flipped: bool = false
 @onready var in_flipping_animation: bool = false
-
+var last_direction: float = 0
 const SPEED: float = 300.0
 const JUMP_VELOCITY: float = -300.0
 const COYOTE_TIME: float = 0.1
@@ -80,17 +80,34 @@ func _physics_process(delta: float) -> void:
 		var direction := Input.get_axis("move_left", "move_right")
 		if direction:
 			velocity.x = direction * SPEED
-			if direction < 0:
-				sprite.scale.x = -1
-			elif direction > 0:
-				sprite.scale.x = 1
+			_update_walking_animation(direction)
 		else:
 			velocity.x = move_toward(velocity.x, 0, SPEED)
+			_stop_walking()
+
+		last_direction = direction
 	else:
 		velocity.x = 0
 
 	move_and_slide()
 
+func _update_walking_animation(direction: float) -> void:
+	if direction > 0:
+		_walk_right()
+	else:
+		_walk_left()
+	if sprite.animation != "walking":
+		sprite.play("walking")
+
+func _stop_walking() -> void:
+	if sprite.animation != "idle":
+		sprite.play("idle")
+
+func _walk_left() -> void:
+	sprite.scale.x = -1
+	
+func _walk_right() -> void:
+	sprite.scale.x = 1
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	in_flipping_animation = false
