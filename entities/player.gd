@@ -1,6 +1,13 @@
 class_name Player
 extends CharacterBody2D
 
+const SPEED: float = 300.0
+const JUMP_VELOCITY: float = -300.0
+const COYOTE_TIME: float = 0.1
+const LAYER_LIGHT := 2
+const LAYER_DARK := 3
+
+@onready var hit_box: CollisionShape2D = $HitBox/CollisionShape2D
 @onready var hit_box_vertical: CollisionShape2D = $HitBoxVertical/CollisionShape2D
 @onready var hit_box_horizontal: CollisionShape2D = $HitBoxHorizontal/CollisionShape2D
 @onready var sprite: AnimatedSprite2D = $Sprite2D
@@ -10,14 +17,8 @@ extends CharacterBody2D
 
 @onready var flipped: bool = false
 @onready var in_flipping_animation: bool = false
-var last_direction: float = 0
-const SPEED: float = 300.0
-const JUMP_VELOCITY: float = -300.0
-const COYOTE_TIME: float = 0.1
 
-const LAYER_LIGHT := 2
-const LAYER_DARK := 3
-
+var last_direction: float = 0.0
 var coyote_timer: float = 0.0
 
 func _ready():
@@ -140,12 +141,17 @@ func _update_walking_animation(direction: float) -> void:
 		_walk_right()
 	else:
 		_walk_left()
+		
 	if sprite.animation != "walking":
 		sprite.play("walking")
+	if not walking_player.playing:
+		walking_player.play()
 
 func _stop_walking() -> void:
 	if sprite.animation != "idle":
 		sprite.play("idle")
+	if walking_player.playing:
+		walking_player.stop()
 
 func _walk_left() -> void:
 	sprite.scale.x = -1

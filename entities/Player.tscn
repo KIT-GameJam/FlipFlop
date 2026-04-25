@@ -291,6 +291,7 @@ speed_scale = 2.0
 
 [node name="WalkingPlayer" type="AudioStreamPlayer2D" parent="." unique_id=554413362]
 stream = ExtResource("3_lw5ub")
+bus = &"SFX"
 
 [connection signal="body_entered" from="HitBoxVertical" to="." method="_on_kill_body_entered"]
 [connection signal="body_entered" from="HitBoxHorizontal" to="." method="_on_kill_body_entered"]
