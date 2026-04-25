@@ -5,16 +5,9 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uqfsl"]
 
-[sub_resource type="Animation" id="Animation_ujmca"]
-resource_name = "Portal"
-markers = [{
-"color": Color(1, 1, 1, 1),
-"name": &"new_marker",
-"time": 0.95
-}]
-
 [sub_resource type="Animation" id="Animation_r6u7u"]
 length = 0.001
+loop_mode = 2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -27,9 +20,23 @@ tracks/0/keys = {
 "update": 0,
 "values": [0.0]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_8xt2d"]
 resource_name = "new_animation"
+length = 2.0
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -37,17 +44,28 @@ tracks/0/path = NodePath("Sprite2D:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.2, 1),
+"times": PackedFloat32Array(0, 2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [0.0, 6.283185307179586]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0.3764706, 0.3764706, 0.3764706, 1), Color(0.7529412, 0.7529412, 0.7529412, 1), Color(0.3764706, 0.3764706, 0.3764706, 1)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_tbsxr"]
 _data = {
-&"Portal": SubResource("Animation_ujmca"),
 &"RESET": SubResource("Animation_r6u7u"),
-&"new_animation": SubResource("Animation_8xt2d")
+&"spin": SubResource("Animation_8xt2d")
 }
 
 [node name="Portal" type="Node2D" unique_id=502516310]
