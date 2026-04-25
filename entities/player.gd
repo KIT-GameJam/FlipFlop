@@ -59,14 +59,12 @@ func _perform_flip(to_flipped: bool) -> void:
 	set_collision_mask_value(mask_to_enable, true)
 	set_collision_mask_value(mask_to_disable, false)
 
-	var correction_offset: Variant = _get_flip_correction(target_collision_position)
-	if correction_offset == null:
+	if not _can_flip_to(target_collision_position):
 		set_collision_mask_value(mask_to_disable, true)
 		set_collision_mask_value(mask_to_enable, false)
 		_fail_flip()
 		return
 
-	global_position.x += correction_offset.x
 	collision_shape.position = target_collision_position
 	hit_box_vertical.position = target_collision_position
 	hit_box_horizontal.position = target_collision_position
@@ -75,32 +73,14 @@ func _perform_flip(to_flipped: bool) -> void:
 	in_flipping_animation = true
 	flipped = to_flipped
 
-func _get_flip_correction(target_collision_position: Vector2) -> Variant:
+func _can_flip_to(target_collision_position: Vector2) -> Variant:
 	var original_collision_position := collision_shape.position
 	collision_shape.position = target_collision_position
-
-	# Try direct flip first
-	if not test_move(global_transform, Vector2(0, _get_flipped_integer() * -1), null, 2, true):
-		collision_shape.position = original_collision_position
-		return Vector2.ZERO
-
-	# Try horizontal corrections
-	var max_correction := 15.0
-	var steps := 15
-	for i in range(1, steps + 1):
-		for direction in [-1, 1]:
-			var offset_val: float = direction * (max_correction * i / steps)
-			var test_transform := global_transform
-			test_transform.origin.x += offset_val
-			if not test_move(test_transform, Vector2(0, _get_flipped_integer() * -1), null, 2, true):
-				collision_shape.position = original_collision_position
-				return Vector2(offset_val, 0)
-
+	collision_shape.shape.radius -= 5
+	var is_blocked := test_move(global_transform, Vector2(0, _get_flipped_integer() * -1), null, 2, true)
 	collision_shape.position = original_collision_position
-	return null
-
-func _can_flip_to(target_collision_position: Vector2) -> bool:
-	return _get_flip_correction(target_collision_position) != null
+	collision_shape.shape.radius += 5
+	return not is_blocked
 
 func _fail_flip():
 	animation_player.play(&"flipflop_up" if flipped else &"flipflop_down")
