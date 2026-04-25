@@ -7,17 +7,17 @@ func _ready() -> void:
 
 func _populate_menu() -> void:
 	var tab_idx = 0
-	
+
 	# Iterate through root categories (these become tabs)
 	for root_category in Settings.get_root_categories():
 		var margin_container = MarginContainer.new()
 		add_child(margin_container)
 		set_tab_title(tab_idx, root_category.display_text)
-		
+
 		var scroll_container = ScrollContainer.new()
 		scroll_container.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 		margin_container.add_child(scroll_container)
-		
+
 		var margin_container2 = MarginContainer.new()
 		margin_container2.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		margin_container2.size_flags_vertical = Control.SIZE_EXPAND_FILL
@@ -30,7 +30,7 @@ func _populate_menu() -> void:
 
 		# Add subcategories as sections, and their settings
 		_populate_category(cat_vbox, root_category, root_category.name)
-		
+
 		tab_idx += 1
 
 ## Recursively populate a category and its subcategories
@@ -45,11 +45,11 @@ func _populate_category(container: VBoxContainer, category: Settings.SettingCate
 		lbl_section_title.theme_type_variation = "SettingsGroupLabel"
 		container.add_child(lbl_section_title)
 		container.add_child(HSeparator.new())
-	
+
 	# Add all settings in this category
 	for setting in category.settings:
 		_add_setting_ui(container, setting, path_prefix + "/" + setting.name)
-	
+
 	# Recursively add all subcategories
 	for sub_category in category.sub_categories:
 		var sub_path = path_prefix + "/" + sub_category.name
@@ -59,18 +59,18 @@ func _add_setting_ui(container: VBoxContainer, setting: Settings.Setting, settin
 	var hbox = HBoxContainer.new()
 	hbox.custom_minimum_size = Vector2(0, 40)
 	container.add_child(hbox)
-	
+
 	# Another HBoxContainer for the label and revert button
 	var hbox_lbl = HBoxContainer.new()
 	hbox_lbl.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	hbox.add_child(hbox_lbl)
-	
+
 	# Label for the name of the setting
 	var lbl_name = Label.new()
 	lbl_name.text = setting.display_text
 	lbl_name.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	hbox_lbl.add_child(lbl_name)
-	
+
 	# Revert button for changing the setting back to its default value
 	# For input bindings a new button for each remapping is created later
 	if not setting is Settings.InputRemappingSetting:
@@ -84,7 +84,7 @@ func _add_setting_ui(container: VBoxContainer, setting: Settings.Setting, settin
 		_update_revert_button(setting_path, revert_btn)
 
 	# TODO: Tooltip
-	
+
 	# Setting-specific editor
 	if setting is Settings.FloatSetting:
 		var slider_setting = setting as Settings.FloatSetting
@@ -131,7 +131,7 @@ func _add_setting_ui(container: VBoxContainer, setting: Settings.Setting, settin
 
 func _add_input_remapping_ui(hbox: HBoxContainer, setting: Settings.InputRemappingSetting, setting_path: String) -> void:
 	var events = setting.value as Array[InputEvent]
-	
+
 	# First reset button
 	var input_revert_btn_1 = Button.new()
 	input_revert_btn_1.icon = get_theme_icon("icon", "RevertButton")
@@ -141,7 +141,7 @@ func _add_input_remapping_ui(hbox: HBoxContainer, setting: Settings.InputRemappi
 	hbox.add_child(input_revert_btn_1)
 	setting.value_changed.connect(func(__): _update_input_mapping_revert_button(setting_path, 0, input_revert_btn_1))
 	_update_input_mapping_revert_button(setting_path, 0, input_revert_btn_1)
-	
+
 	# First remapping button
 	var remapping_btn1 = action_remapping_button_scene.instantiate()
 	remapping_btn1.set_event(events[0] if events.size() > 0 else null)
