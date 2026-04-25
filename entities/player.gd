@@ -15,6 +15,7 @@ const SFX := {
 
 @onready var hit_box_vertical: CollisionShape2D = $HitBoxVertical/CollisionShape2D
 @onready var hit_box_horizontal: CollisionShape2D = $HitBoxHorizontal/CollisionShape2D
+@onready var lever_area: CollisionShape2D = $LeverArea/CollisionShape2D
 @onready var sprite: AnimatedSprite2D = $Sprite
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
@@ -44,6 +45,7 @@ func set_flipped(to_flipped: bool) -> void:
 		collision_shape.position.y *= -1
 		hit_box_vertical.position.y *= -1
 		hit_box_horizontal.position.y *= -1
+		lever_area.position.y *= -1
 		sprite.position.y *= -1
 		sprite.scale.y *= -1
 		sprite.modulate = sprite.modulate.inverted()
@@ -68,6 +70,7 @@ func _perform_flip(to_flipped: bool) -> void:
 	collision_shape.position = target_collision_position
 	hit_box_vertical.position = target_collision_position
 	hit_box_horizontal.position = target_collision_position
+	lever_area.position = target_collision_position
 	animation_player.play(&"flip_down" if to_flipped else &"flip_up")
 	in_flipping_animation = true
 	flipped = to_flipped
@@ -116,14 +119,14 @@ func _physics_process(delta: float) -> void:
 
 	var was_grounded := is_on_ground()
 	move_and_slide()
-	
+
 	if is_on_ground():
 		coyote_timer = COYOTE_TIME
 		if not was_grounded:
 			_on_landed()
 	else:
 		coyote_timer -= delta
-	
+
 	_update_animations()
 
 func _apply_gravity(delta: float) -> void:
@@ -159,17 +162,17 @@ func _on_landed() -> void:
 func _update_animations() -> void:
 	if in_flipping_animation:
 		return
-		
+
 	if last_direction > 0:
 		sprite.scale.x = 1
 	elif last_direction < 0:
 		sprite.scale.x = -1
-		
+
 	if is_on_ground():
 		if abs(velocity.x) > 0:
 			if sprite.animation != "walking":
 				sprite.play("walking")
-			
+
 			# Only play walking SFX if landing SFX is not playing
 			if player_sfx_player.stream != SFX.landing or not player_sfx_player.playing:
 				player_sfx_player.play_sfx(SFX.walking)
