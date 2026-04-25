@@ -7,7 +7,7 @@ const COYOTE_TIME: float = 0.1
 const LAYER_LIGHT := 2
 const LAYER_DARK := 3
 
-@onready var hit_box: CollisionShape2D = $HitBox/CollisionShape2D
+@onready var hit_box: CollisionShape2D = $HitBoxHorizontal/CollisionShape2D
 @onready var hit_box_vertical: CollisionShape2D = $HitBoxVertical/CollisionShape2D
 @onready var hit_box_horizontal: CollisionShape2D = $HitBoxHorizontal/CollisionShape2D
 @onready var sprite: AnimatedSprite2D = $Sprite2D
