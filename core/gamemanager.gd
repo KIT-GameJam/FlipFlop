@@ -64,6 +64,9 @@ func resume():
 #region Level Loading
 
 func _show_main_level() -> void:
+	if get_tree() == null:
+		return
+
 	if main_level == null:
 		push_error("main_level is not set in GameManager")
 		return
