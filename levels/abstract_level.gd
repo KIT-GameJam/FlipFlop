@@ -2,9 +2,9 @@ class_name AbstractLevel
 extends Node2D
 
 enum Level {
-	Level1,
-	Level2,
-	Level3,
+	Start,
+	Wall,
+	Pillars,
 	TheFall,
 }
 

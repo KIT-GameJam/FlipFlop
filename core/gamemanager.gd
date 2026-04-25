@@ -2,7 +2,7 @@ extends Node
 class_name GameManager
 
 ## Use this when you have only one level
-@export var main_level := AbstractLevel.Level.Level1
+@export var main_level := AbstractLevel.Level.Start
 ## Whether the mouse should be captured while in a level
 @export var is_mouse_captured_in_level: bool = true
 
@@ -10,9 +10,9 @@ class_name GameManager
 @onready var menu_layer: CanvasLayer = %MenuLayer
 
 const LEVELS: Dictionary[AbstractLevel.Level, PackedScene] = {
-	AbstractLevel.Level.Level1: preload("res://levels/level1.tscn"),
-	AbstractLevel.Level.Level2: preload("res://levels/level_tower.tscn"),
-	AbstractLevel.Level.Level3: preload("res://levels/level_pillars.tscn"),
+	AbstractLevel.Level.Start: preload("res://levels/level_start.tscn"),
+	AbstractLevel.Level.Wall: preload("res://levels/level_tower.tscn"),
+	AbstractLevel.Level.Pillars: preload("res://levels/level_pillars.tscn"),
 	AbstractLevel.Level.TheFall: preload("res://levels/level_the_fall.tscn"),
 }
 var loaded_levels: Dictionary[AbstractLevel.Level, AbstractLevel] = {}
@@ -96,9 +96,7 @@ func change_level(new_level: AbstractLevel.Level, entrance: int) -> void:
 	await get_tree().process_frame
 	player.collision_layer = collision_layer
 	player.collision_mask = collision_mask
-
-
-	current_level = new_level
+	# current_level = new_level
 
 
 #endregion

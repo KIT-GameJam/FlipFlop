@@ -1,7 +1,7 @@
 class_name Portal
 extends Node2D
 
-@export var level := AbstractLevel.Level.Level1;
+@export var level := AbstractLevel.Level.Start;
 @export_range(0, 10) var entrance := 0
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
