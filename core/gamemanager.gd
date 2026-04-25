@@ -11,7 +11,9 @@ class_name GameManager
 
 const LEVELS: Dictionary[AbstractLevel.Level, PackedScene] = {
 	AbstractLevel.Level.Level1: preload("res://levels/level1.tscn"),
-	AbstractLevel.Level.Level2: preload("res://levels/level2.tscn"),
+	AbstractLevel.Level.Level2: preload("res://levels/level_tower.tscn"),
+	AbstractLevel.Level.Level3: preload("res://levels/level_pillars.tscn"),
+	AbstractLevel.Level.TheFall: preload("res://levels/level_the_fall.tscn"),
 }
 var loaded_levels: Dictionary[AbstractLevel.Level, AbstractLevel] = {}
 
@@ -88,12 +90,16 @@ func change_level(new_level: AbstractLevel.Level, entrance: int) -> void:
 			remove_child(current_level_node)
 		current_level_node = loaded_levels[new_level]
 		add_child(current_level_node)
-	player.position = current_level_node.entrances[entrance]
+	player.position = loaded_levels[new_level].entrances[entrance]
 
 	# wait for one frame before enabling collision again
 	await get_tree().process_frame
 	player.collision_layer = collision_layer
 	player.collision_mask = collision_mask
+
+
+	current_level = new_level
+
 
 #endregion
 

@@ -1,3 +1,6 @@
 [gd_scene format=3 uid="uid://bqtj0b3vwlp4q"]
 
+[ext_resource type="Script" uid="uid://con7lnlvdyhn3" path="res://levels/portal/level_entrance.gd" id="1_yoy4p"]
+
 [node name="LevelEntrance" type="Marker2D" unique_id=46011893]
+script = ExtResource("1_yoy4p")

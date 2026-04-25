@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bta4h2svhcjry"
-path="res://.godot/imported/fog.png-de5bb845d7f736f90f8a78689895cd3a.ctex"
+uid="uid://cdakthem0hbaj"
+path="res://.godot/imported/portal..png-9ec959ce7c6306ef3bca2a56a188427a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/tiles/fog.png"
-dest_files=["res://.godot/imported/fog.png-de5bb845d7f736f90f8a78689895cd3a.ctex"]
+source_file="res://assets/entities/portal..png"
+dest_files=["res://.godot/imported/portal..png-9ec959ce7c6306ef3bca2a56a188427a.ctex"]
 
 [params]
 
