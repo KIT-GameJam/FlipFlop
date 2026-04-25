@@ -13,7 +13,6 @@ const SFX := {
 	"landing": preload("res://assets/sfx/landing.mp3")
 }
 
-@onready var hit_box: CollisionShape2D = $HitBoxHorizontal/CollisionShape2D
 @onready var hit_box_vertical: CollisionShape2D = $HitBoxVertical/CollisionShape2D
 @onready var hit_box_horizontal: CollisionShape2D = $HitBoxHorizontal/CollisionShape2D
 @onready var sprite: AnimatedSprite2D = $Sprite2D
@@ -108,69 +107,82 @@ func _get_flipped_integer() -> int:
 	return 1 if flipped else -1
 
 func _physics_process(delta: float) -> void:
-	var on_ground: bool = is_on_ground()
-
-	if on_ground:
-		coyote_timer = COYOTE_TIME
-	else:
-		coyote_timer -= delta
-
-	if Input.is_action_just_pressed(&"flip") and coyote_timer > 0:
-		flip()
-		coyote_timer = 0
-
 	if not in_flipping_animation:
-		# Add the gravity.
-		if not on_ground and not in_flipping_animation:
-			velocity += get_gravity() * delta * (-1 if flipped else 1)
-
-		if Input.is_action_just_pressed(&"jump") and coyote_timer > 0:
-			velocity.y = JUMP_VELOCITY * (-1 if flipped else 1)
-			coyote_timer = 0
-			player_sfx_player.play_sfx(SFX.jumping)
-		elif Input.is_action_just_pressed(&"reset"):
-			Global.game_manager.respawn()
-		elif Input.is_action_just_pressed(&"interact"):
-			for lever in close_levers:
-				lever.toggle()
-
-		var direction := Input.get_axis("move_left", "move_right")
-		if direction:
-			velocity.x = direction * SPEED
-			_update_walking_animation(direction)
-		else:
-			velocity.x = move_toward(velocity.x, 0, SPEED)
-			_stop_walking()
-
-		last_direction = direction
+		_apply_gravity(delta)
+		_handle_input()
+		_handle_movement()
 	else:
 		velocity.x = 0
 
+	var was_grounded := is_on_ground()
 	move_and_slide()
-
-func _update_walking_animation(direction: float) -> void:	
-	if direction > 0:
-		_walk_right()
+	
+	if is_on_ground():
+		coyote_timer = COYOTE_TIME
+		if not was_grounded:
+			_on_landed()
 	else:
-		_walk_left()
+		coyote_timer -= delta
+	
+	_update_animations()
+
+func _apply_gravity(delta: float) -> void:
 	if not is_on_ground():
-		_stop_walking()
+		velocity += get_gravity() * delta * (-1 if flipped else 1)
+
+func _handle_input() -> void:
+	if Input.is_action_just_pressed(&"flip") and coyote_timer > 0:
+		flip()
+		coyote_timer = 0
 		return
-	if sprite.animation != "walking":
-		sprite.play("walking")
-	player_sfx_player.play_sfx(SFX.walking)
 
-func _stop_walking() -> void:
-	if sprite.animation != "idle":
-		sprite.play("idle")
-	if player_sfx_player.stream == SFX.walking:
-		player_sfx_player.stop_sfx()
+	if Input.is_action_just_pressed(&"jump") and coyote_timer > 0:
+		velocity.y = JUMP_VELOCITY * (-1 if flipped else 1)
+		coyote_timer = 0
+		player_sfx_player.play_sfx(SFX.jumping)
+	elif Input.is_action_just_pressed(&"reset"):
+		Global.game_manager.respawn()
+	elif Input.is_action_just_pressed(&"interact"):
+		for lever in close_levers:
+			lever.toggle()
 
-func _walk_left() -> void:
-	sprite.scale.x = -1
+func _handle_movement() -> void:
+	last_direction = Input.get_axis("move_left", "move_right")
+	if last_direction:
+		velocity.x = last_direction * SPEED
+	else:
+		velocity.x = move_toward(velocity.x, 0, SPEED)
 
-func _walk_right() -> void:
-	sprite.scale.x = 1
+func _on_landed() -> void:
+	player_sfx_player.play_sfx(SFX.landing)
+
+func _update_animations() -> void:
+	if in_flipping_animation:
+		return
+		
+	if last_direction > 0:
+		sprite.scale.x = 1
+	elif last_direction < 0:
+		sprite.scale.x = -1
+		
+	if is_on_ground():
+		if abs(velocity.x) > 0:
+			if sprite.animation != "walking":
+				sprite.play("walking")
+			
+			# Only play walking SFX if landing SFX is not playing
+			if player_sfx_player.stream != SFX.landing or not player_sfx_player.playing:
+				player_sfx_player.play_sfx(SFX.walking)
+		else:
+			if sprite.animation != "idle":
+				sprite.play("idle")
+			if player_sfx_player.stream == SFX.walking:
+				player_sfx_player.stop_sfx()
+	else:
+		if sprite.animation != "idle":
+			sprite.play("idle")
+		if player_sfx_player.stream == SFX.walking:
+			player_sfx_player.stop_sfx()
 
 func _on_animation_player_animation_finished(_anim_name: StringName) -> void:
 	in_flipping_animation = false
