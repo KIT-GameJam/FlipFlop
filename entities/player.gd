@@ -10,7 +10,8 @@ const LAYER_DARK := 3
 const SFX := {
 	"walking": preload("res://assets/sfx/walking.mp3"),
 	"jumping": preload("res://assets/sfx/jumping.mp3"),
-	"landing": preload("res://assets/sfx/landing.mp3")
+	"landing": preload("res://assets/sfx/landing.mp3"),
+	"flip": preload("res://assets/sfx/flip.mp3"),
 }
 
 @onready var hit_box_vertical: CollisionShape2D = $HitBoxVertical/CollisionShape2D
@@ -70,6 +71,7 @@ func _perform_flip(to_flipped: bool) -> void:
 	hit_box_horizontal.position = target_collision_position
 	lever_area.position = target_collision_position
 	animation_player.play(&"flip_down" if to_flipped else &"flip_up")
+	player_sfx_player.play_sfx(SFX.flip)
 	in_flipping_animation = true
 	flipped = to_flipped
 
@@ -137,6 +139,8 @@ func _handle_movement() -> void:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 
 func _on_landed() -> void:
+	if player_sfx_player.stream == SFX.flip and player_sfx_player.playing:
+		return
 	player_sfx_player.play_sfx(SFX.landing)
 
 func _update_animations() -> void:
@@ -153,8 +157,8 @@ func _update_animations() -> void:
 			if sprite.animation != "walking":
 				sprite.play("walking")
 
-			# Only play walking SFX if landing SFX is not playing
-			if player_sfx_player.stream != SFX.landing or not player_sfx_player.playing:
+			# Only play walking SFX if no other SFX is playing
+			if player_sfx_player.stream == SFX.walking or not player_sfx_player.playing:
 				player_sfx_player.play_sfx(SFX.walking)
 		else:
 			if sprite.animation != "idle":
