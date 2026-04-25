@@ -17,7 +17,7 @@ level = 7
 position = Vector2(193, 179)
 
 [node name="SecretEntrance" parent="." index="3" unique_id=46011893 instance=ExtResource("4_ua5ty")]
-position = Vector2(1257, 236)
+position = Vector2(1256, 280)
 
 [node name="Portal2" parent="." index="4" unique_id=1475928890 instance=ExtResource("3_b3oru")]
 position = Vector2(-21, 82)
