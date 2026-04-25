@@ -14,6 +14,9 @@ const SPEED: float = 300.0
 const JUMP_VELOCITY: float = -300.0
 const COYOTE_TIME: float = 0.1
 
+const LAYER_LIGHT := 2
+const LAYER_DARK := 3
+
 var coyote_timer: float = 0.0
 
 func _ready():
@@ -25,10 +28,21 @@ func flip() -> void:
 func is_on_ground() -> bool:
 	return (is_on_ceiling() if flipped else is_on_floor())
 
+func set_flipped(to_flipped: bool) -> void:
+	if to_flipped != flipped:
+		set_collision_mask_value(LAYER_LIGHT, not get_collision_mask_value(LAYER_LIGHT))
+		set_collision_mask_value(LAYER_DARK, not get_collision_mask_value(LAYER_DARK))
+		collision_shape.position.y *= -1
+		hit_box.position.y *= -1
+		sprite.position.y *= -1
+		sprite.scale.y *= -1
+		sprite.modulate = sprite.modulate.inverted()
+		flipped = to_flipped
+
 func _perform_flip(to_flipped: bool) -> void:
 	var target_collision_position := Vector2(0, 35 if to_flipped else -35)
-	var mask_to_enable := 2 if to_flipped else 3
-	var mask_to_disable := 3 if to_flipped else 2
+	var mask_to_enable := LAYER_LIGHT if to_flipped else LAYER_DARK
+	var mask_to_disable := LAYER_DARK if to_flipped else LAYER_LIGHT
 
 	set_collision_mask_value(mask_to_enable, true)
 	set_collision_mask_value(mask_to_disable, false)
@@ -43,7 +57,7 @@ func _perform_flip(to_flipped: bool) -> void:
 	global_position.x += correction_offset.x
 	collision_shape.position = target_collision_position
 	hit_box.position = target_collision_position
-	animation_player.play("flip_down" if to_flipped else "flip_up")
+	animation_player.play(&"flip_down" if to_flipped else &"flip_up")
 	in_flipping_animation = true
 	flipped = to_flipped
 
@@ -101,6 +115,8 @@ func _physics_process(delta: float) -> void:
 		if Input.is_action_just_pressed("jump") and coyote_timer > 0:
 			velocity.y = JUMP_VELOCITY * (-1 if flipped else 1)
 			coyote_timer = 0
+		elif Input.is_action_just_pressed("reset"):
+			Global.game_manager.respawn()
 
 		var direction := Input.get_axis("move_left", "move_right")
 		if direction:

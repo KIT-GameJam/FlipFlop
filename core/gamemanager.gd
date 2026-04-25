@@ -103,15 +103,18 @@ func change_level(new_level: AbstractLevel.Level, entrance: int) -> void:
 		add_child.call_deferred(current_level_node)
 	await get_tree().process_frame
 	last_entrance = entrance
-	player.position = current_level_node.entrances[entrance]
+	var entrance_node := current_level_node.entrances[entrance]
+	player.position = entrance_node.position
 
 	# wait for one frame before enabling collision again
 	await get_tree().process_frame
 	player.hit_box.disabled = false
 	player.collision_layer = collision_layer
 	player.collision_mask = collision_mask
+	player.set_flipped(entrance_node.flipped)
 
 func respawn() -> void:
+	player.velocity = Vector2.ZERO
 	change_level(current_level, last_entrance)
 
 #endregion

@@ -14,8 +14,8 @@ enum Level {
 	PathOfPain,
 }
 
-var entrances: Array[Vector2] = []
+var entrances: Array[LevelEntrance] = []
 
 func _ready() -> void:
 	for entrance in find_children("", "LevelEntrance"):
-		entrances.append(entrance.position)
+		entrances.append(entrance)
