@@ -3,7 +3,7 @@ extends Node2D
 
 enum Level {
 	Start,
-	Wall,
+	Tower,
 	Pillars,
 	TheFall,
 }

@@ -12,10 +12,13 @@ tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAIAAAAAAAA
 [node name="LevelEntrance" parent="." index="1" unique_id=46011893 instance=ExtResource("2_62pjv")]
 position = Vector2(22, 357)
 
-[node name="Portal" parent="." index="2" unique_id=502516310 instance=ExtResource("3_diugo")]
+[node name="LevelEntrance2" parent="." index="2" unique_id=191320062 instance=ExtResource("2_62pjv")]
+position = Vector2(1260, 266)
+
+[node name="Portal" parent="." index="3" unique_id=502516310 instance=ExtResource("3_diugo")]
 position = Vector2(698, 48)
 level = 2
 
-[node name="Portal2" parent="." index="3" unique_id=1019210161 instance=ExtResource("3_diugo")]
+[node name="Portal2" parent="." index="4" unique_id=1019210161 instance=ExtResource("3_diugo")]
 position = Vector2(9, 284)
 entrance = 1

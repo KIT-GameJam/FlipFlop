@@ -11,7 +11,7 @@ class_name GameManager
 
 const LEVELS: Dictionary[AbstractLevel.Level, PackedScene] = {
 	AbstractLevel.Level.Start: preload("res://levels/level_start.tscn"),
-	AbstractLevel.Level.Wall: preload("res://levels/level_tower.tscn"),
+	AbstractLevel.Level.Tower: preload("res://levels/level_tower.tscn"),
 	AbstractLevel.Level.Pillars: preload("res://levels/level_pillars.tscn"),
 	AbstractLevel.Level.TheFall: preload("res://levels/level_the_fall.tscn"),
 }
