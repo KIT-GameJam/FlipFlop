@@ -4,13 +4,13 @@
 [ext_resource type="Script" uid="uid://1mjt83fygiua" path="res://ui/screens/title-screen/title_screen.gd" id="1_rm86k"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_s0ue6"]
-font_size = 150
+font_size = 180
 
 [sub_resource type="LabelSettings" id="LabelSettings_73xnf"]
-font_size = 50
+font_size = 60
 
 [sub_resource type="LabelSettings" id="LabelSettings_wly7t"]
-font_size = 12
+font_size = 18
 
 [node name="TitleScreen" type="Control" unique_id=165552926]
 layout_mode = 3
@@ -48,7 +48,7 @@ autowrap_mode = 2
 [node name="Label2" type="Label" parent="CenterContainer/VBoxContainer" unique_id=2117014839]
 custom_minimum_size = Vector2(731.345, 0)
 layout_mode = 2
-text = "Game of the Year Edition"
+text = "GameJam Edition"
 label_settings = SubResource("LabelSettings_73xnf")
 horizontal_alignment = 1
 autowrap_mode = 2
@@ -69,22 +69,22 @@ layout_mode = 2
 
 [node name="Start" type="Button" parent="CenterContainer2/VBoxContainer" unique_id=603626461]
 layout_mode = 2
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 24
 text = "Start"
 
 [node name="Options" type="Button" parent="CenterContainer2/VBoxContainer" unique_id=1650158032]
 layout_mode = 2
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 24
 text = "Settings"
 
 [node name="Credit" type="Button" parent="CenterContainer2/VBoxContainer" unique_id=426848008]
 layout_mode = 2
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 24
 text = "Credits"
 
 [node name="Quit" type="Button" parent="CenterContainer2/VBoxContainer" unique_id=2004677633]
 layout_mode = 2
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 24
 text = "Quit"
 
 [node name="Label" type="Label" parent="." unique_id=1786336606]
@@ -100,7 +100,7 @@ offset_right = 76.5
 offset_bottom = -2.0
 grow_horizontal = 2
 grow_vertical = 0
-text = "My Version"
+text = "v1.0-gamejam"
 label_settings = SubResource("LabelSettings_wly7t")
 horizontal_alignment = 1
 
