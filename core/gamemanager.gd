@@ -14,6 +14,8 @@ const LEVELS: Dictionary[AbstractLevel.Level, PackedScene] = {
 	AbstractLevel.Level.Tower: preload("res://levels/level_tower.tscn"),
 	AbstractLevel.Level.Pillars: preload("res://levels/level_pillars.tscn"),
 	AbstractLevel.Level.TheFall: preload("res://levels/level_the_fall.tscn"),
+	AbstractLevel.Level.Wall: preload("res://levels/level_wall.tscn"),
+	AbstractLevel.Level.Floor: preload("res://levels/level_floor.tscn"),
 }
 var loaded_levels: Dictionary[AbstractLevel.Level, AbstractLevel] = {}
 

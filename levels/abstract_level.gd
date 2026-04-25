@@ -6,6 +6,10 @@ enum Level {
 	Tower,
 	Pillars,
 	TheFall,
+	Wall,
+	Spikes,
+	TinyDoor,
+	Floor,
 }
 
 var entrances: Array[Vector2] = []
