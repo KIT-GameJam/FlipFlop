@@ -15,6 +15,7 @@ environment = ExtResource("2_v1n10")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=544983326]
 stream = ExtResource("3_t557q")
+volume_db = -5.0
 autoplay = true
 bus = &"Music"
 

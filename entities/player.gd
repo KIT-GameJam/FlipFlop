@@ -126,6 +126,7 @@ func _physics_process(delta: float) -> void:
 		if Input.is_action_just_pressed(&"jump") and coyote_timer > 0:
 			velocity.y = JUMP_VELOCITY * (-1 if flipped else 1)
 			coyote_timer = 0
+			player_sfx_player.play_sfx(SFX.jumping)
 		elif Input.is_action_just_pressed(&"reset"):
 			Global.game_manager.respawn()
 		elif Input.is_action_just_pressed(&"interact"):
@@ -147,6 +148,10 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func _update_walking_animation(direction: float) -> void:
+	if not is_on_ground():
+		_stop_walking()
+		return
+	
 	if direction > 0:
 		_walk_right()
 	else:
@@ -159,7 +164,8 @@ func _update_walking_animation(direction: float) -> void:
 func _stop_walking() -> void:
 	if sprite.animation != "idle":
 		sprite.play("idle")
-	player_sfx_player.stop_sfx()
+	if player_sfx_player.stream == SFX.walking:
+		player_sfx_player.stop_sfx()
 
 func _walk_left() -> void:
 	sprite.scale.x = -1
