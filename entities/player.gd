@@ -38,6 +38,7 @@ func _perform_flip(to_flipped: bool) -> void:
 		return
 
 	collision_shape.position = target_collision_position
+	hit_box.position = target_collision_position
 	animation_player.play("flip_down" if to_flipped else "flip_up")
 	in_flipping_animation = true
 	flipped = to_flipped
@@ -105,7 +106,7 @@ func _stop_walking() -> void:
 
 func _walk_left() -> void:
 	sprite.scale.x = -1
-	
+
 func _walk_right() -> void:
 	sprite.scale.x = 1
 
