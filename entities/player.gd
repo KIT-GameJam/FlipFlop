@@ -8,7 +8,7 @@ extends CharacterBody2D
 @onready var in_flipping_animation: bool = false
 
 const SPEED: float = 300.0
-const JUMP_VELOCITY: float = -400.0
+const JUMP_VELOCITY: float = -300.0
 const COYOTE_TIME: float = 0.15
 
 var coyote_timer: float = 0.0
