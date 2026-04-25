@@ -5,6 +5,7 @@ extends Area2D
 @export var toggle_blocks: Array[Vector2i]
 
 @onready var sprite: Sprite2D = $Sprite2D
+@onready var sfx_flip_player: AudioStreamPlayer2D = $AudioStreamPlayer2D
 
 var toggled := false
 
@@ -31,6 +32,9 @@ func toggle() -> void:
 			tile_map.set_cell(block, mapping[0], mapping[1])
 	toggled = not toggled
 	sprite.scale.x *= -1
+	if sfx_flip_player.playing:
+		sfx_flip_player.stop()
+	sfx_flip_player.play()
 
 func reset() -> void:
 	if toggled:
