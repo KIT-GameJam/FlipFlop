@@ -26,16 +26,16 @@ func _perform_flip(to_flipped: bool) -> void:
 	var target_collision_position := Vector2(0, 35 if to_flipped else -35)
 	var mask_to_enable := 2 if to_flipped else 3
 	var mask_to_disable := 3 if to_flipped else 2
-	
+
 	set_collision_mask_value(mask_to_enable, true)
 	set_collision_mask_value(mask_to_disable, false)
-	
+
 	if not _can_flip_to(target_collision_position):
 		set_collision_mask_value(mask_to_disable, true)
 		set_collision_mask_value(mask_to_enable, false)
 		_fail_flip()
 		return
-		
+
 	collision_shape.position = target_collision_position
 	animation_player.play("flip_down" if to_flipped else "flip_up")
 	in_flipping_animation = true
@@ -57,23 +57,23 @@ func _get_flipped_integer() -> int:
 
 func _physics_process(delta: float) -> void:
 	var on_ground: bool = is_on_ground()
-	
+
 	if on_ground:
 		coyote_timer = COYOTE_TIME
 	else:
 		coyote_timer -= delta
-	
+
 	# Add the gravity.
 	if not on_ground:
 		velocity += get_gravity() * delta * (-1 if flipped else 1)
-	
+
 	if Input.is_action_just_pressed("jump") and coyote_timer > 0:
 		velocity.y = JUMP_VELOCITY * (-1 if flipped else 1)
 		coyote_timer = 0
 	elif Input.is_action_just_pressed("flip") and coyote_timer > 0:
 		flip()
 		coyote_timer = 0
-	
+
 	if not in_flipping_animation:
 		var direction := Input.get_axis("move_left", "move_right")
 		if direction:
@@ -86,7 +86,7 @@ func _physics_process(delta: float) -> void:
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 	else:
 		velocity.x = 0
-	
+
 	move_and_slide()
 
 

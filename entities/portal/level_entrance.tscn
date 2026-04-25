@@ -1,6 +1,0 @@
-[gd_scene format=3 uid="uid://bqtj0b3vwlp4q"]
-
-[ext_resource type="Script" uid="uid://b84kw1aw8yu76" path="res://entities/portal/level_entrance.gd" id="1_qbuph"]
-
-[node name="LevelEntrance" type="Node2D" unique_id=1667162910]
-script = ExtResource("1_qbuph")

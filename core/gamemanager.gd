@@ -2,15 +2,24 @@ extends Node
 class_name GameManager
 
 ## Use this when you have only one level
-@export var main_level: PackedScene
+@export var main_level := AbstractLevel.Level.Level1
 ## Whether the mouse should be captured while in a level
 @export var is_mouse_captured_in_level: bool = true
 
 @onready var pause_menu: Control = %PauseMenu
 @onready var menu_layer: CanvasLayer = %MenuLayer
 
-var level = 0
-var current_level_node: Node
+const LEVELS: Dictionary[AbstractLevel.Level, PackedScene] = {
+	AbstractLevel.Level.Level1: preload("res://levels/level1.tscn"),
+	AbstractLevel.Level.Level2: preload("res://levels/level2.tscn"),
+}
+var loaded_levels: Dictionary[AbstractLevel.Level, AbstractLevel] = {}
+
+var current_level: AbstractLevel.Level
+var current_level_node: AbstractLevel
+
+const PlayerScene = preload("res://entities/Player.tscn")
+var player: Player
 
 func _ready() -> void:
 	Global.set_game_manager(self)
@@ -31,7 +40,6 @@ func _ready() -> void:
 	_show_title_screen()
 
 func _start_game() -> void:
-	level = 0
 	_show_controls()
 
 #region Pausing
@@ -53,32 +61,43 @@ func resume():
 
 #region Level Loading
 
-func _unload_current_level() -> void:
-	if current_level_node != null:
-		current_level_node.queue_free()
-		current_level_node = null
-
 func _show_main_level() -> void:
 	if main_level == null:
 		push_error("main_level is not set in GameManager")
 		return
 
+	if not player:
+		player = PlayerScene.instantiate()
+		add_child(player)
+
 	InputManager.set_is_in_game(true)
-	var next_level: Node = main_level.instantiate()
-	if next_level.has_signal("reset"):
-		next_level.reset.connect(_reload_current_level)
-	add_child(next_level)
-	current_level_node = next_level
+	loaded_levels.clear()
+	for level in LEVELS:
+		loaded_levels[level] = LEVELS[level].instantiate()
+	change_level(main_level, 0)
 
+func change_level(new_level: AbstractLevel.Level, entrance: int) -> void:
+	# disable player collision to prevent interactions with new level
+	var collision_layer := player.collision_layer
+	player.collision_layer = 0
+	var collision_mask := player.collision_mask
+	player.collision_mask = 0
 
-func _reload_current_level() -> void:
-	_unload_current_level()
+	if new_level != current_level or current_level_node == null:
+		if current_level_node != null:
+			remove_child(current_level_node)
+		current_level_node = loaded_levels[new_level]
+		add_child(current_level_node)
+	player.position = current_level_node.entrances[entrance]
 
-	_show_main_level()
+	# wait for one frame before enabling collision again
+	await get_tree().process_frame
+	player.collision_layer = collision_layer
+	player.collision_mask = collision_mask
+
 #endregion
 
 #region Showing Different GUI views
-
 
 func _show_win_screen() -> void:
 	InputManager.set_is_in_game(false)
@@ -114,11 +133,20 @@ func _return_to_title_screen() -> void:
 	get_tree().paused = false
 	InputManager.set_is_paused(false)
 	InputManager.set_is_in_game(false)
-	# Destroy level
-	if current_level_node != null:
-		current_level_node.queue_free()
-		current_level_node = null
+
+	# Destroy levels
+	for level in loaded_levels.values():
+		level.queue_free()
+	loaded_levels.clear()
+	current_level_node = null
+
+	# Destroy player
+	if player != null:
+		player.queue_free()
+		player = null
+
 	_show_title_screen()
+
 #endregion
 
 func _quit_game() -> void:
@@ -127,6 +155,3 @@ func _quit_game() -> void:
 
 func set_world_environment(env: Environment):
 	$WorldEnvironment.environment = env
-	
-func change_scene(level: AbstractLevel.Level, entrance: LevelEntrance.Entrance):
-	pass

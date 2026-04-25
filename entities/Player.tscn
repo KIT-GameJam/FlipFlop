@@ -214,6 +214,7 @@ _data = {
 }
 
 [node name="Player" type="CharacterBody2D" unique_id=1281984372]
+z_index = 1
 collision_layer = 8
 collision_mask = 12
 script = ExtResource("1_eh0f6")
