@@ -18,7 +18,7 @@ flipped = true
 
 [node name="Portal" parent="." index="3" unique_id=502516310 instance=ExtResource("3_80os1")]
 position = Vector2(1227, 75)
-level = 6
+level = 15
 
 [node name="Checkpoint-Portal" parent="." index="4" unique_id=1822816881 instance=ExtResource("3_80os1")]
 position = Vector2(60, 56)
