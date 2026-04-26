@@ -16,6 +16,9 @@ const TILE_MAPPING: Dictionary[Array, Array] = {
 	[0, Vector2i(1, 3)]: [0, Vector2i(0, 3)],
 	[0, Vector2i(2, 3)]: [0, Vector2i(3, 3)],
 	[0, Vector2i(3, 3)]: [0, Vector2i(2, 3)],
+	[0, Vector2i(0, 2)]: [0, Vector2i(1, 2)],	
+	[0, Vector2i(1, 2)]: [0, Vector2i(0, 2)],
+
 }
 
 func _ready() -> void:
