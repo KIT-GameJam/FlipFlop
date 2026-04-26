@@ -20,12 +20,12 @@ position = Vector2(717, 394)
 
 [node name="Jump-Portal" parent="." index="4" unique_id=558941800 instance=ExtResource("3_acmhb")]
 position = Vector2(718, 433)
-level = 14
+level = 16
 entrance = 2
 
 [node name="Portal - Cycle - Right" parent="." index="5" unique_id=1894847785 instance=ExtResource("3_acmhb")]
 position = Vector2(1288, 602)
-level = 15
+level = 17
 entrance = 1
 
 [node name="Portal - Cycle - Bot" parent="." index="6" unique_id=1326911371 instance=ExtResource("3_acmhb")]
