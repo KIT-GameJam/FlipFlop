@@ -14,11 +14,11 @@ tile_map_data = PackedByteArray("AAAAAAAAAAAAAAMAAAAAAAEAAAAAAAEAAAAAAAIAAAAAAAE
 position = Vector2(91, 188)
 
 [node name="LevelEntrance Left" parent="." index="2" unique_id=46011893 instance=ExtResource("2_p8x4h")]
-position = Vector2(41, 561)
+position = Vector2(40, 560)
 flipped = true
 
 [node name="LevelEntrance Top" parent="." index="3" unique_id=1319083518 instance=ExtResource("2_p8x4h")]
-position = Vector2(637, 4)
+position = Vector2(640, 0)
 flipped = true
 
 [node name="Portal" parent="." index="4" unique_id=502516310 instance=ExtResource("3_o72hk")]
@@ -31,6 +31,6 @@ level = 16
 entrance = 1
 
 [node name="Lever" parent="." index="6" unique_id=2106870502 instance=ExtResource("4_xa3x2")]
-position = Vector2(1258, 240)
+position = Vector2(1260, 240)
 sprite_black = true
 toggle_blocks = Array[Vector2i]([Vector2i(2, 2)])

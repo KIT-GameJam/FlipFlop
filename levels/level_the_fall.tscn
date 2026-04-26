@@ -18,5 +18,5 @@ level = 2
 entrance = 1
 
 [node name="Portal2" parent="." index="3" unique_id=888531071 instance=ExtResource("3_nwert")]
-position = Vector2(942, 414)
+position = Vector2(940, 414)
 level = 10

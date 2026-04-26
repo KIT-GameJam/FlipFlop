@@ -15,7 +15,7 @@ position = Vector2(660, 480)
 entrance = 1
 
 [node name="Lever" parent="." index="2" unique_id=2106870502 instance=ExtResource("3_l3r21")]
-position = Vector2(661, 360)
+position = Vector2(660, 360)
 scale = Vector2(1, -1)
 toggle_blocks = Array[Vector2i]([Vector2i(14, 7), Vector2i(14, 8), Vector2i(14, 9), Vector2i(14, 10), Vector2i(14, 11), Vector2i(14, 12), Vector2i(10, 7), Vector2i(10, 8), Vector2i(10, 9), Vector2i(10, 10), Vector2i(10, 11), Vector2i(10, 12)])
 

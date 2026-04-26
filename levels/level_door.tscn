@@ -18,31 +18,31 @@ position = Vector2(983, 141)
 level = 9
 
 [node name="Lever 5 Bot" parent="." index="3" unique_id=2106870502 instance=ExtResource("4_bbo3m")]
-position = Vector2(260, 639)
+position = Vector2(260, 640)
 sprite_black = true
 toggle_blocks = Array[Vector2i]([Vector2i(20, 15), Vector2i(20, 14), Vector2i(20, 13), Vector2i(20, 12), Vector2i(20, 11)])
 
 [node name="Lever 5 Top" parent="." index="4" unique_id=95432268 instance=ExtResource("4_bbo3m")]
-position = Vector2(340, 637)
+position = Vector2(340, 640)
 sprite_black = true
 toggle_blocks = Array[Vector2i]([Vector2i(20, 10), Vector2i(20, 9), Vector2i(20, 8), Vector2i(20, 7), Vector2i(20, 6)])
 
 [node name="Lever 6 Inner" parent="." index="5" unique_id=705792766 instance=ExtResource("4_bbo3m")]
-position = Vector2(497, 637)
+position = Vector2(497, 640)
 sprite_black = true
 toggle_blocks = Array[Vector2i]([Vector2i(20, 13), Vector2i(20, 12), Vector2i(20, 11), Vector2i(20, 10), Vector2i(20, 9), Vector2i(20, 8)])
 
 [node name="Lever 3 Outer" parent="." index="6" unique_id=1418103847 instance=ExtResource("4_bbo3m")]
-position = Vector2(422, 639)
+position = Vector2(422, 640)
 sprite_black = true
 toggle_blocks = Array[Vector2i]([Vector2i(20, 15), Vector2i(20, 14), Vector2i(20, 13), Vector2i(20, 8), Vector2i(20, 7), Vector2i(20, 6)])
 
 [node name="Lever Mix 1" parent="." index="7" unique_id=1563015659 instance=ExtResource("4_bbo3m")]
-position = Vector2(588, 638)
+position = Vector2(588, 640)
 sprite_black = true
 toggle_blocks = Array[Vector2i]([Vector2i(20, 13), Vector2i(20, 11), Vector2i(20, 10), Vector2i(20, 8), Vector2i(20, 7)])
 
 [node name="Lever Mix 2" parent="." index="8" unique_id=81504202 instance=ExtResource("4_bbo3m")]
-position = Vector2(665, 638)
+position = Vector2(665, 640)
 sprite_black = true
 toggle_blocks = Array[Vector2i]([Vector2i(20, 12), Vector2i(20, 10), Vector2i(20, 9)])
