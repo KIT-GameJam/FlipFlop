@@ -3,7 +3,8 @@
 [ext_resource type="Script" uid="uid://cdr0i4cvspixu" path="res://levels/portal/portal.gd" id="1_0d7no"]
 [ext_resource type="Texture2D" uid="uid://cdakthem0hbaj" path="res://assets/entities/portal..png" id="2_ujmca"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_uqfsl"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_ujmca"]
+radius = 15.0
 
 [sub_resource type="Animation" id="Animation_r6u7u"]
 length = 0.001
@@ -76,7 +77,7 @@ collision_layer = 0
 collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=907787019]
-shape = SubResource("RectangleShape2D_uqfsl")
+shape = SubResource("CircleShape2D_ujmca")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1119629883]
 texture = ExtResource("2_ujmca")
