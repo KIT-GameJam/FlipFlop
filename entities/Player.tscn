@@ -2,13 +2,13 @@
 
 [ext_resource type="Script" uid="uid://b54suilbngo83" path="res://entities/player.gd" id="1_eh0f6"]
 [ext_resource type="Texture2D" uid="uid://dlx1diwsab5id" path="res://assets/entities/player/Player-Sheet.png" id="2_ojs4q"]
-[ext_resource type="Script" uid="uid://sohsw0pm1htw" path="res://entities/player_sfx_player.gd" id="3_lw5ub"]
+[ext_resource type="Script" uid="uid://y5albmagtxbv" path="res://entities/player_sfx_player.gd" id="3_lw5ub"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lw5ub"]
-size = Vector2(20, 80)
+size = Vector2(20, 72)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ks8m5"]
-size = Vector2(40, 60)
+size = Vector2(32, 60)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_eh0f6"]
 radius = 15.0
