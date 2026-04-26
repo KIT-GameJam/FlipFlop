@@ -21,4 +21,4 @@ position = Vector2(1256, 280)
 
 [node name="Portal2" parent="." index="4" unique_id=1475928890 instance=ExtResource("3_b3oru")]
 position = Vector2(-21, 82)
-level = 6
+level = 8
