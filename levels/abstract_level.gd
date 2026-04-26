@@ -1,6 +1,8 @@
 class_name AbstractLevel
 extends Node2D
 
+signal won
+
 enum Level {
 	Start,
 	Tower,
@@ -18,6 +20,7 @@ enum Level {
 	Climbing,
 	Cycle,
 	Portal,
+	End,
 }
 
 @onready var tile_map_layer: TileMapLayer = $TileMapLayer
@@ -30,3 +33,7 @@ func _ready() -> void:
 		entrances.append(entrance)
 	for lever in find_children("", "Lever"):
 		levers.append(lever)
+
+
+func _on_rocket_start() -> void:
+	won.emit()

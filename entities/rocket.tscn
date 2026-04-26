@@ -1,0 +1,66 @@
+[gd_scene format=3 uid="uid://bfwsk8h04smyi"]
+
+[ext_resource type="Script" uid="uid://cyrcuj5s05lxw" path="res://entities/rocket.gd" id="1_sd6pk"]
+[ext_resource type="Texture2D" uid="uid://bsvr6xuhoi7j2" path="res://assets/entities/Rocket.png" id="2_sd6pk"]
+[ext_resource type="Texture2D" uid="uid://dj3g3fbcehdfe" path="res://assets/entities/door.png" id="3_0vr7n"]
+[ext_resource type="PackedScene" uid="uid://syr77ofup15a" path="res://entities/lever.tscn" id="3_5nuxw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5nuxw"]
+size = Vector2(229, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2pmjp"]
+size = Vector2(160, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lkigh"]
+size = Vector2(40, 80)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_87yjy"]
+size = Vector2(160, 115)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fpoe2"]
+size = Vector2(40, 80)
+
+[node name="Rocket" type="StaticBody2D" unique_id=1662955603]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("1_sd6pk")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=370400626]
+position = Vector2(0, -140)
+texture = ExtResource("2_sd6pk")
+
+[node name="Door" type="Sprite2D" parent="." unique_id=1839181834]
+visible = false
+position = Vector2(-60, -120)
+texture = ExtResource("3_0vr7n")
+
+[node name="Lever" parent="." unique_id=2106870502 instance=ExtResource("3_5nuxw")]
+position = Vector2(0, -80)
+sprite_black = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1849496421]
+position = Vector2(0.5, -20)
+shape = SubResource("RectangleShape2D_5nuxw")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="." unique_id=1830397095]
+position = Vector2(0, -60)
+shape = SubResource("RectangleShape2D_2pmjp")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="." unique_id=1982325882]
+position = Vector2(60, -120)
+shape = SubResource("RectangleShape2D_lkigh")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="." unique_id=483455668]
+position = Vector2(0, -217.5)
+shape = SubResource("RectangleShape2D_87yjy")
+
+[node name="CollisionDoor" type="CollisionShape2D" parent="." unique_id=1506299670]
+position = Vector2(-60, -120)
+shape = SubResource("RectangleShape2D_fpoe2")
+disabled = true
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1525589173]
+position = Vector2(-200, -240)
+enabled = false
+
+[connection signal="lever_toggled" from="Lever" to="." method="_on_lever_toggled"]

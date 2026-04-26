@@ -1,6 +1,8 @@
 class_name Lever
 extends Area2D
 
+signal lever_toggled
+
 @export var sprite_black := false
 @export var toggle_blocks: Array[Vector2i]
 
@@ -16,9 +18,8 @@ const TILE_MAPPING: Dictionary[Array, Array] = {
 	[0, Vector2i(1, 3)]: [0, Vector2i(0, 3)],
 	[0, Vector2i(2, 3)]: [0, Vector2i(3, 3)],
 	[0, Vector2i(3, 3)]: [0, Vector2i(2, 3)],
-	[0, Vector2i(0, 2)]: [0, Vector2i(1, 2)],	
+	[0, Vector2i(0, 2)]: [0, Vector2i(1, 2)],
 	[0, Vector2i(1, 2)]: [0, Vector2i(0, 2)],
-
 }
 
 func _ready() -> void:
@@ -38,6 +39,7 @@ func toggle() -> void:
 	if sfx_flip_player.playing:
 		sfx_flip_player.stop()
 	sfx_flip_player.play()
+	lever_toggled.emit()
 
 func reset() -> void:
 	if toggled:
