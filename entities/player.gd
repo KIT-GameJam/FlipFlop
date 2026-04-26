@@ -40,17 +40,20 @@ func is_on_ground() -> bool:
 	return (is_on_ceiling() if flipped else is_on_floor())
 
 func set_flipped(to_flipped: bool) -> void:
-	if to_flipped != flipped:
-		set_collision_mask_value(LAYER_LIGHT, not get_collision_mask_value(LAYER_LIGHT))
-		set_collision_mask_value(LAYER_DARK, not get_collision_mask_value(LAYER_DARK))
-		collision_shape.position.y *= -1
-		hit_box_vertical.position.y *= -1
-		hit_box_horizontal.position.y *= -1
-		lever_area.position.y *= -1
-		sprite.position.y *= -1
-		sprite.scale.y *= -1
-		sprite.modulate = sprite.modulate.inverted()
-		flipped = to_flipped
+	if in_flipping_animation:
+		animation_player.stop()
+		in_flipping_animation = false
+	var s := 1.0 if to_flipped else -1.0
+	set_collision_mask_value(LAYER_LIGHT, to_flipped)
+	set_collision_mask_value(LAYER_DARK, not to_flipped)
+	collision_shape.position.y = s * absf(collision_shape.position.y)
+	hit_box_vertical.position.y = s * absf(hit_box_vertical.position.y)
+	hit_box_horizontal.position.y = s * absf(hit_box_horizontal.position.y)
+	lever_area.position.y = s * absf(lever_area.position.y)
+	sprite.position.y = s * absf(sprite.position.y)
+	sprite.scale.y = -s
+	sprite.modulate = Color.WHITE if to_flipped else Color.BLACK
+	flipped = to_flipped
 
 func _perform_flip(to_flipped: bool) -> void:
 	var target_collision_position := Vector2(0, 35 if to_flipped else -35)
