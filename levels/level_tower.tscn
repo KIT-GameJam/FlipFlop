@@ -14,4 +14,4 @@ position = Vector2(40, 320)
 
 [node name="Portal" parent="." index="2" unique_id=502516310 instance=ExtResource("3_jqiq6")]
 position = Vector2(959, 37)
-level = 4
+level = 2

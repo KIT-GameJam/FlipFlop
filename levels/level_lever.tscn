@@ -12,6 +12,7 @@ tile_map_data = PackedByteArray("AAD/////AAABAAIAAAD//wAAAAABAAIAAAD//wEAAAABAAI
 
 [node name="Portal" parent="." index="1" unique_id=502516310 instance=ExtResource("2_s28sl")]
 position = Vector2(660, 480)
+entrance = 1
 
 [node name="Lever" parent="." index="2" unique_id=2106870502 instance=ExtResource("3_l3r21")]
 position = Vector2(661, 360)

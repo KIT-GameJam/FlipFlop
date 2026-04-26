@@ -17,4 +17,4 @@ position = Vector2(1261, 285)
 
 [node name="Portal" parent="." index="3" unique_id=502516310 instance=ExtResource("3_cfmvi")]
 position = Vector2(1301, 283)
-level = 3
+level = 4
