@@ -14,6 +14,9 @@ enum Level {
 	PathOfPain,
 	LeverIntro,
 	Lever,
+	Cave,
+	Climbing,
+	Cycle,
 }
 
 @onready var tile_map_layer: TileMapLayer = $TileMapLayer
