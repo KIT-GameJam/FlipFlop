@@ -1,4 +1,4 @@
-[gd_scene format=4 uid="uid://b5w3w0neqiu3d"]
+[gd_scene format=4 uid="uid://6k5ecx4dhdbe"]
 
 [ext_resource type="PackedScene" uid="uid://cyfvcuxi210mg" path="res://levels/abstract_level.tscn" id="1_ssq2i"]
 [ext_resource type="PackedScene" uid="uid://bsohonq75ieg2" path="res://levels/portal/portal.tscn" id="2_j6hbk"]
@@ -11,7 +11,7 @@ tile_map_data = PackedByteArray("AAD/////AAABAAIAAAD//wAAAAABAAIAAAD//wEAAAABAAI
 
 [node name="Portal" parent="." index="1" unique_id=502516310 instance=ExtResource("2_j6hbk")]
 position = Vector2(400, 680)
-level = 15
+level = 14
 entrance = 1
 
 [node name="LevelEntrance" parent="." index="2" unique_id=46011893 instance=ExtResource("3_p7k5f")]
