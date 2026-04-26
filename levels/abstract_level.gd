@@ -8,7 +8,7 @@ enum Level {
 	TheFall,
 	Wall,
 	Spikes,
-	TinyDoor,
+	Door,
 	Floor,
 	Clouds,
 	PathOfPain,
