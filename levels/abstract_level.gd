@@ -17,6 +17,7 @@ enum Level {
 	Cave,
 	Climbing,
 	Cycle,
+	Portal,
 }
 
 @onready var tile_map_layer: TileMapLayer = $TileMapLayer
