@@ -15,6 +15,7 @@ config/version="v1.0.0-alpha"
 run/main_scene="res://core/gamemanager.tscn"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 boot_splash/bg_color=Color(0, 0, 0, 1)
+boot_splash/image="uid://du3ei1g2urekk"
 config/icon="res://icon.svg"
 
 [audio]
