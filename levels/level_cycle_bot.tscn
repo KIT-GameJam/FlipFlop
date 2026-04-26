@@ -27,7 +27,7 @@ level = 12
 
 [node name="Cycle Portal Left" parent="." index="5" unique_id=558941800 instance=ExtResource("3_o72hk")]
 position = Vector2(-10, 595)
-level = 14
+level = 16
 entrance = 1
 
 [node name="Lever" parent="." index="6" unique_id=2106870502 instance=ExtResource("4_xa3x2")]
