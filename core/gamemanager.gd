@@ -58,6 +58,9 @@ func _ready() -> void:
 
 	_show_title_screen()
 
+func _process(delta: float) -> void:
+	DebugGlobal.set_debug_info("FPS", roundi(1 / delta))
+
 func _start_game() -> void:
 	_show_controls()
 
