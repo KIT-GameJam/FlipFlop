@@ -14,6 +14,9 @@ size = Vector2(32, 60)
 radius = 15.0
 height = 70.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l1ths"]
+size = Vector2(30, 70)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_a1f57"]
 atlas = ExtResource("2_ojs4q")
 region = Rect2(160, 0, 40, 80)
@@ -305,9 +308,9 @@ shape = SubResource("RectangleShape2D_ks8m5")
 position = Vector2(0, -35)
 shape = SubResource("CapsuleShape2D_eh0f6")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1080355892]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2085429514]
 position = Vector2(0, -35)
-shape = SubResource("CapsuleShape2D_eh0f6")
+shape = SubResource("RectangleShape2D_l1ths")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=1161652188]
 position = Vector2(0, -40)

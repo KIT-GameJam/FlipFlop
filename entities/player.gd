@@ -81,10 +81,10 @@ func _perform_flip(to_flipped: bool) -> void:
 func _can_flip_to(target_collision_position: Vector2) -> Variant:
 	var original_collision_position := collision_shape.position
 	collision_shape.position = target_collision_position
-	collision_shape.shape.radius -= 5
+	collision_shape.shape.size.x -= 10
 	var is_blocked := test_move(global_transform, Vector2(0, _get_flipped_integer() * -1), null, 2, true)
 	collision_shape.position = original_collision_position
-	collision_shape.shape.radius += 5
+	collision_shape.shape.size.x += 10
 	return not is_blocked
 
 func _fail_flip():
