@@ -5,10 +5,10 @@
 [ext_resource type="Script" uid="uid://y5albmagtxbv" path="res://entities/player_sfx_player.gd" id="3_lw5ub"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lw5ub"]
-size = Vector2(20, 72)
+size = Vector2(30, 72)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ks8m5"]
-size = Vector2(32, 60)
+size = Vector2(32, 70)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_eh0f6"]
 radius = 15.0

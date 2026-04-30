@@ -22,7 +22,10 @@ const SFX := {
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var player_sfx_player: AudioStreamPlayer2D = $PlayerSfxPlayer
 
-@onready var flipped: bool = false
+var flipped: bool = false:
+	set(value):
+		flipped = value
+		up_direction = Vector2.DOWN if value else Vector2.UP
 @onready var in_flipping_animation: bool = false
 
 var last_direction: float = 0.0
@@ -32,12 +35,13 @@ var close_levers: Array[Lever] = []
 
 func _ready():
 	sprite.modulate = Color.BLACK
+	floor_snap_length = 8.0
 
 func flip() -> void:
 	_perform_flip(not flipped)
 
 func is_on_ground() -> bool:
-	return (is_on_ceiling() if flipped else is_on_floor())
+	return is_on_floor()
 
 func set_flipped(to_flipped: bool) -> void:
 	if in_flipping_animation:
@@ -102,13 +106,12 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.x = 0
 
-	var was_grounded := is_on_ground()
 	move_and_slide()
 
 	if is_on_ground():
-		coyote_timer = COYOTE_TIME
-		if not was_grounded:
+		if coyote_timer <= 0:
 			_on_landed()
+		coyote_timer = COYOTE_TIME
 	else:
 		coyote_timer -= delta
 
