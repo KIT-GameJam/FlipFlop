@@ -20,6 +20,22 @@ size = Vector2(160, 115)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fpoe2"]
 size = Vector2(40, 80)
 
+[sub_resource type="Gradient" id="Gradient_0vr7n"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_5nuxw"]
+gradient = SubResource("Gradient_0vr7n")
+width = 40
+height = 40
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2pmjp"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(50, 10, 0)
+gravity = Vector3(0, 98, 0)
+turbulence_enabled = true
+
 [node name="Rocket" type="StaticBody2D" unique_id=1662955603]
 collision_layer = 8
 collision_mask = 0
@@ -58,5 +74,10 @@ shape = SubResource("RectangleShape2D_87yjy")
 position = Vector2(-60, -120)
 shape = SubResource("RectangleShape2D_fpoe2")
 disabled = true
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=678325740]
+texture = SubResource("GradientTexture2D_5nuxw")
+speed_scale = 5.0
+process_material = SubResource("ParticleProcessMaterial_2pmjp")
 
 [connection signal="lever_toggled" from="Lever" to="." method="_on_lever_toggled"]
