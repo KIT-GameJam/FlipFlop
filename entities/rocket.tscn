@@ -59,8 +59,4 @@ position = Vector2(-60, -120)
 shape = SubResource("RectangleShape2D_fpoe2")
 disabled = true
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=1525589173]
-position = Vector2(-200, -240)
-enabled = false
-
 [connection signal="lever_toggled" from="Lever" to="." method="_on_lever_toggled"]

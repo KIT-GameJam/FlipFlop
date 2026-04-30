@@ -3,6 +3,7 @@ extends Area2D
 
 signal lever_toggled
 
+@export var disabled := false
 @export var sprite_black := false
 @export var toggle_blocks: Array[Vector2i]
 
@@ -27,6 +28,9 @@ func _ready() -> void:
 		modulate = Color.BLACK
 
 func toggle() -> void:
+	if disabled:
+		return
+	
 	var tile_map: TileMapLayer = Global.game_manager.current_level_node.tile_map_layer
 	for block in toggle_blocks:
 		var source_id := tile_map.get_cell_source_id(block)
