@@ -1,8 +1,8 @@
 [gd_scene format=4 uid="uid://dknpppe06jvdd"]
 
 [ext_resource type="PackedScene" uid="uid://cyfvcuxi210mg" path="res://levels/abstract_level.tscn" id="1_470o0"]
-[ext_resource type="PackedScene" uid="uid://bqtj0b3vwlp4q" path="res://levels/portal/level_entrance.tscn" id="2_eed6j"]
-[ext_resource type="PackedScene" uid="uid://bsohonq75ieg2" path="res://levels/portal/portal.tscn" id="3_lfscc"]
+[ext_resource type="PackedScene" uid="uid://bqtj0b3vwlp4q" path="res://entities/portal/level_entrance.tscn" id="2_eed6j"]
+[ext_resource type="PackedScene" uid="uid://bsohonq75ieg2" path="res://entities/portal/portal.tscn" id="3_lfscc"]
 [ext_resource type="PackedScene" uid="uid://syr77ofup15a" path="res://entities/lever.tscn" id="4_eed6j"]
 
 [node name="Level3" unique_id=226412309 instance=ExtResource("1_470o0")]

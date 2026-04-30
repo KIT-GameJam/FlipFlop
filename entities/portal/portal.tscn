@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bsohonq75ieg2"]
 
-[ext_resource type="Script" uid="uid://cdr0i4cvspixu" path="res://levels/portal/portal.gd" id="1_0d7no"]
+[ext_resource type="Script" uid="uid://cdr0i4cvspixu" path="res://entities/portal/portal.gd" id="1_0d7no"]
 [ext_resource type="Texture2D" uid="uid://cdakthem0hbaj" path="res://assets/entities/portal..png" id="2_ujmca"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ujmca"]

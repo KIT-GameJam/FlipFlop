@@ -10,7 +10,6 @@
 [node name="Gamemanager" type="Node" unique_id=1050225795]
 process_mode = 3
 script = ExtResource("1_htktm")
-main_level = 5
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=224925465]
 environment = ExtResource("2_v1n10")
@@ -24,6 +23,9 @@ bus = &"Music"
 [node name="SFXStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1895702388]
 stream = ExtResource("4_xlp76")
 bus = &"SFX"
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=2039207859 groups=["camera"]]
+anchor_mode = 0
 
 [node name="MenuLayer" type="CanvasLayer" parent="." unique_id=1393391734]
 unique_name_in_owner = true

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cyfvcuxi210mg"]
 
-[ext_resource type="Script" uid="uid://bp6dajvjaofem" path="res://levels/abstract_level.gd" id="1_c78cs"]
+[ext_resource type="Script" uid="uid://bp6dajvjaofem" path="res://levels/scripts/abstract_level.gd" id="1_c78cs"]
 [ext_resource type="Texture2D" uid="uid://c7yg15vg2wufa" path="res://assets/tiles/tiles_atlas.png" id="2_8tasw"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1u8rv"]

@@ -37,7 +37,7 @@ var current_level: AbstractLevel.Level
 var current_level_node: AbstractLevel
 var last_entrance := 0
 
-const PlayerScene = preload("res://entities/Player.tscn")
+const PlayerScene = preload("res://entities/player/Player.tscn")
 var player: Player
 
 func _ready() -> void:

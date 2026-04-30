@@ -2,8 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://cyfvcuxi210mg" path="res://levels/abstract_level.tscn" id="1_evwio"]
 [ext_resource type="PackedScene" uid="uid://syr77ofup15a" path="res://entities/lever.tscn" id="2_ecr41"]
-[ext_resource type="PackedScene" uid="uid://bsohonq75ieg2" path="res://levels/portal/portal.tscn" id="3_o1x0d"]
-[ext_resource type="PackedScene" uid="uid://bqtj0b3vwlp4q" path="res://levels/portal/level_entrance.tscn" id="4_o1x0d"]
+[ext_resource type="PackedScene" uid="uid://bsohonq75ieg2" path="res://entities/portal/portal.tscn" id="3_o1x0d"]
+[ext_resource type="PackedScene" uid="uid://bqtj0b3vwlp4q" path="res://entities/portal/level_entrance.tscn" id="4_o1x0d"]
 
 [node name="LevelLeverIntro" unique_id=226412309 instance=ExtResource("1_evwio")]
 
