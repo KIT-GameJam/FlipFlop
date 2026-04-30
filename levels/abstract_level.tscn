@@ -13,18 +13,18 @@ texture_region_size = Vector2i(40, 40)
 1:2/0 = 0
 1:2/0/physics_layer_2/polygon_0/points = PackedVector2Array(-20, -20, 20, -20, 20, 20, -20, 20)
 0:3/0 = 0
-0:3/0/physics_layer_2/polygon_0/points = PackedVector2Array(-20, -20, 20, -20, 20, 20, -20, 20)
-0:3/0/physics_layer_3/polygon_0/points = PackedVector2Array(-20, -20, 20, -20, 20, 20, -20, 20)
+0:3/0/physics_layer_2/polygon_0/points = PackedVector2Array(-20, -7, 20, -7, 20, 7, -20, 7)
+0:3/0/physics_layer_3/polygon_0/points = PackedVector2Array(-20, -13, 20, -13, 20, 13, -20, 13)
 1:3/0 = 0
-1:3/0/physics_layer_2/polygon_0/points = PackedVector2Array(-20, -20, 20, -20, 20, 20, -20, 20)
-1:3/0/physics_layer_3/polygon_0/points = PackedVector2Array(-20, -20, 20, -20, 20, 20, -20, 20)
+1:3/0/physics_layer_2/polygon_0/points = PackedVector2Array(-20, -7, 20, -7, 20, 7, -20, 7)
+1:3/0/physics_layer_3/polygon_0/points = PackedVector2Array(-20, -13, 20, -13, 20, 13, -20, 13)
 0:2/0 = 0
 2:3/0 = 0
-2:3/0/physics_layer_2/polygon_0/points = PackedVector2Array(-20, -20, 20, -20, 20, 20, -20, 20)
-2:3/0/physics_layer_4/polygon_0/points = PackedVector2Array(20, 20, -20, 20, -20, -20, 20, -20)
+2:3/0/physics_layer_2/polygon_0/points = PackedVector2Array(-7, -20, 7, -20, 7, 20, -7, 20)
+2:3/0/physics_layer_4/polygon_0/points = PackedVector2Array(13, 20, -13, 20, -13, -20, 13, -20)
 3:3/0 = 0
-3:3/0/physics_layer_2/polygon_0/points = PackedVector2Array(20, 20, -20, 20, -20, -20, 20, -20)
-3:3/0/physics_layer_4/polygon_0/points = PackedVector2Array(20, -20, 20, 20, -20, 20, -20, -20)
+3:3/0/physics_layer_2/polygon_0/points = PackedVector2Array(7, 20, -7, 20, -7, -20, 7, -20)
+3:3/0/physics_layer_4/polygon_0/points = PackedVector2Array(13, -20, 13, 20, -13, 20, -13, -20)
 
 [sub_resource type="TileSet" id="TileSet_ldao0"]
 tile_size = Vector2i(40, 40)
