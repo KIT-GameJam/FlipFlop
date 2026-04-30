@@ -43,6 +43,9 @@ var player: Player
 func _ready() -> void:
 	Global.set_game_manager(self)
 	DebugGlobal.debug_label = %DebugLabel
+	
+	# Environment
+	RenderingServer.set_default_clear_color(Color.BLACK)
 
 	# Settings
 	var user_settings = UserDefinedSettings.new()
