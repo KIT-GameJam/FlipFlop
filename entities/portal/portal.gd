@@ -1,5 +1,5 @@
 class_name Portal
-extends Node2D
+extends Area2D
 
 signal player_entered
 

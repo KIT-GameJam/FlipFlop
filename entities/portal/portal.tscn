@@ -12,23 +12,20 @@ shader = ExtResource("2_tqc7l")
 shader_parameter/time_scale = 1.0
 shader_parameter/spiral_strength = 7.0
 shader_parameter/pull_speed = 1.0
+shader_parameter/rotation_speed = -2.0
 shader_parameter/particle_density = 70.0
 shader_parameter/contrast = 0.04
 shader_parameter/portal_radius = 0.48
 shader_parameter/core_size = 0.04
 
-[node name="Portal" type="Node2D" unique_id=502516310]
-script = ExtResource("1_0d7no")
-
-[node name="Area2D" type="Area2D" parent="." unique_id=176681850]
+[node name="Portal" type="Area2D" unique_id=176681850]
 collision_layer = 0
 collision_mask = 8
+script = ExtResource("1_0d7no")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=907787019]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=907787019]
 shape = SubResource("CircleShape2D_ujmca")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1119629883]
 material = SubResource("ShaderMaterial_lirgq")
 texture = ExtResource("2_ujmca")
-
-[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

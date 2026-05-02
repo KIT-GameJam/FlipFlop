@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://b77xamfnqsalj"]
+
+[ext_resource type="Script" uid="uid://dg8cnic5suhx" path="res://entities/portal/transitions.gd" id="1_lysdw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_li2vq"]
+size = Vector2(40, 80)
+
+[node name="Transitions" type="Area2D" unique_id=2144886877]
+collision_layer = 0
+collision_mask = 8
+script = ExtResource("1_lysdw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1585054569]
+position = Vector2(0, -40)
+shape = SubResource("RectangleShape2D_li2vq")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
