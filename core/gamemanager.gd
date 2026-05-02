@@ -11,25 +11,25 @@ class_name GameManager
 @onready var sfx_stream_player: AudioStreamPlayer = $SFXStreamPlayer
 
 const LEVELS: Dictionary[AbstractLevel.Level, PackedScene] = {
-	AbstractLevel.Level.Start: preload("res://levels/level_start.tscn"),
-	AbstractLevel.Level.Tower: preload("res://levels/level_tower.tscn"),
-	AbstractLevel.Level.Pillars: preload("res://levels/level_pillars.tscn"),
-	AbstractLevel.Level.TheFall: preload("res://levels/level_the_fall.tscn"),
-	AbstractLevel.Level.Wall: preload("res://levels/level_wall.tscn"),
-	AbstractLevel.Level.Floor: preload("res://levels/level_floor.tscn"),
-	AbstractLevel.Level.Spikes: preload("res://levels/level_spikes.tscn"),
-	AbstractLevel.Level.Clouds: preload("res://levels/level_clouds.tscn"),
-	AbstractLevel.Level.PathOfPain: preload("res://levels/level_path_of_pain.tscn"),
-	AbstractLevel.Level.LeverIntro: preload("res://levels/level_lever_intro.tscn"),
-	AbstractLevel.Level.Lever: preload("res://levels/level_lever.tscn"),
-	AbstractLevel.Level.Door: preload("res://levels/level_door.tscn"),
-	AbstractLevel.Level.Climbing: preload("res://levels/level_climbing.tscn"),
-	AbstractLevel.Level.Cave: preload("res://levels/level_cave.tscn"),
-	AbstractLevel.Level.Portal: preload("res://levels/level_portal.tscn"),
-	AbstractLevel.Level.End: preload("res://levels/level_end.tscn"),
-	AbstractLevel.Level.Cycle_Top: preload("res://levels/level_cycle_top.tscn"),
-	AbstractLevel.Level.Cycle_Bot: preload("res://levels/level_cycle_bot.tscn"),
-	AbstractLevel.Level.White_Lever: preload("res://levels/white_lever_level.tscn")
+	AbstractLevel.Level.Start:      preload("res://levels/01_start.tscn"),
+	AbstractLevel.Level.Floor:      preload("res://levels/02_floor.tscn"),
+	AbstractLevel.Level.Tower:      preload("res://levels/03_tower.tscn"),
+	AbstractLevel.Level.Pillars:    preload("res://levels/04_pillars.tscn"),
+	AbstractLevel.Level.Wall:       preload("res://levels/05_wall.tscn"),
+	AbstractLevel.Level.Spikes:     preload("res://levels/06_spikes.tscn"),
+	AbstractLevel.Level.TheFall:    preload("res://levels/07_the_fall.tscn"),
+	AbstractLevel.Level.LeverIntro: preload("res://levels/08_lever_intro.tscn"),
+	AbstractLevel.Level.Lever:      preload("res://levels/09_lever.tscn"),
+	AbstractLevel.Level.PathOfPain: preload("res://levels/10_path_of_pain.tscn"),
+	AbstractLevel.Level.Clouds:     preload("res://levels/11_clouds.tscn"),
+	AbstractLevel.Level.Climbing:   preload("res://levels/12_climbing.tscn"),
+	AbstractLevel.Level.Portal:     preload("res://levels/13_portal.tscn"),
+	AbstractLevel.Level.Cycle_Top:  preload("res://levels/14_cycle_top.tscn"),
+	AbstractLevel.Level.Cycle_Bot:  preload("res://levels/15_cycle_bot.tscn"),
+	AbstractLevel.Level.Cave:       preload("res://levels/16_cave.tscn"),
+	AbstractLevel.Level.End:        preload("res://levels/99_end.tscn"),
+	AbstractLevel.Level.Door:        preload("res://levels/unused/level_door.tscn"),
+	AbstractLevel.Level.White_Lever: preload("res://levels/unused/white_lever_level.tscn")
 }
 var loaded_levels: Dictionary[AbstractLevel.Level, AbstractLevel] = {}
 
