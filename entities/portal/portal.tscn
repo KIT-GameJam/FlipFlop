@@ -1,73 +1,21 @@
 [gd_scene format=3 uid="uid://bsohonq75ieg2"]
 
 [ext_resource type="Script" uid="uid://cdr0i4cvspixu" path="res://entities/portal/portal.gd" id="1_0d7no"]
+[ext_resource type="Shader" uid="uid://b1tw1aoecu27r" path="res://entities/portal/portal.gdshader" id="2_tqc7l"]
 [ext_resource type="Texture2D" uid="uid://cdakthem0hbaj" path="res://assets/entities/portal..png" id="2_ujmca"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ujmca"]
 radius = 15.0
 
-[sub_resource type="Animation" id="Animation_r6u7u"]
-length = 0.001
-loop_mode = 2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_8xt2d"]
-resource_name = "new_animation"
-length = 2.0
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, 6.283185307179586]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 1, 2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Color(0.3764706, 0.3764706, 0.3764706, 1), Color(0.7529412, 0.7529412, 0.7529412, 1), Color(0.3764706, 0.3764706, 0.3764706, 1)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_tbsxr"]
-_data = {
-&"RESET": SubResource("Animation_r6u7u"),
-&"spin": SubResource("Animation_8xt2d")
-}
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lirgq"]
+shader = ExtResource("2_tqc7l")
+shader_parameter/time_scale = 1.0
+shader_parameter/spiral_strength = 7.0
+shader_parameter/pull_speed = 1.0
+shader_parameter/particle_density = 70.0
+shader_parameter/contrast = 0.04
+shader_parameter/portal_radius = 0.48
+shader_parameter/core_size = 0.04
 
 [node name="Portal" type="Node2D" unique_id=502516310]
 script = ExtResource("1_0d7no")
@@ -80,9 +28,7 @@ collision_mask = 8
 shape = SubResource("CircleShape2D_ujmca")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1119629883]
+material = SubResource("ShaderMaterial_lirgq")
 texture = ExtResource("2_ujmca")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=196429948]
-libraries/ = SubResource("AnimationLibrary_tbsxr")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

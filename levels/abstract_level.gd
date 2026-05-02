@@ -21,7 +21,8 @@ enum Level {
 	Portal,
 	End,
 	Cycle_Top,
-	Cycle_Bot
+	Cycle_Bot,
+	White_Lever
 }
 
 @onready var tile_map_layer: TileMapLayer = $TileMapLayer

@@ -11,6 +11,7 @@
 [node name="Gamemanager" type="Node" unique_id=1050225795]
 process_mode = 3
 script = ExtResource("1_htktm")
+main_level = 18
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=224925465]
 environment = ExtResource("2_v1n10")
