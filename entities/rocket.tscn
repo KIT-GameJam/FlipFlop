@@ -1,9 +1,10 @@
 [gd_scene format=3 uid="uid://bfwsk8h04smyi"]
 
 [ext_resource type="Script" uid="uid://cyrcuj5s05lxw" path="res://entities/rocket.gd" id="1_sd6pk"]
-[ext_resource type="Texture2D" uid="uid://bsvr6xuhoi7j2" path="res://assets/entities/Rocket.png" id="2_sd6pk"]
+[ext_resource type="Texture2D" uid="uid://bsvr6xuhoi7j2" path="res://assets/entities/rocket/Rocket.png" id="2_sd6pk"]
 [ext_resource type="Texture2D" uid="uid://dj3g3fbcehdfe" path="res://assets/entities/door.png" id="3_0vr7n"]
 [ext_resource type="PackedScene" uid="uid://syr77ofup15a" path="res://entities/lever.tscn" id="3_5nuxw"]
+[ext_resource type="Texture2D" uid="uid://jbbnrxninr14" path="res://assets/entities/rocket/RocketCrash.png" id="4_5nuxw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5nuxw"]
 size = Vector2(229, 40)
@@ -37,18 +38,26 @@ gravity = Vector3(0, 98, 0)
 turbulence_enabled = true
 
 [node name="Rocket" type="StaticBody2D" unique_id=1662955603]
+position = Vector2(1, 0)
 collision_layer = 8
 collision_mask = 0
 script = ExtResource("1_sd6pk")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=370400626]
+[node name="Sprites" type="Node2D" parent="." unique_id=231294880]
 position = Vector2(0, -140)
+
+[node name="Rocket" type="Sprite2D" parent="Sprites" unique_id=370400626]
 texture = ExtResource("2_sd6pk")
 
-[node name="Door" type="Sprite2D" parent="." unique_id=1839181834]
+[node name="Door" type="Sprite2D" parent="Sprites" unique_id=1839181834]
 visible = false
-position = Vector2(-60, -120)
+position = Vector2(-60, 20)
 texture = ExtResource("3_0vr7n")
+
+[node name="Crash" type="Sprite2D" parent="Sprites" unique_id=1294122230]
+visible = false
+position = Vector2(0, -80)
+texture = ExtResource("4_5nuxw")
 
 [node name="Lever" parent="." unique_id=2106870502 instance=ExtResource("3_5nuxw")]
 position = Vector2(0, -80)
