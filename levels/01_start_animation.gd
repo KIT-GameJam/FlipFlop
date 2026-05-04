@@ -2,7 +2,7 @@ extends AnimationPlayer
 
 @onready var player: Player = get_tree().get_first_node_in_group("player")
 @onready var camera: GlobalCamera = get_tree().get_first_node_in_group("camera")
-@onready var rocket: Rocket = $"../Rocket"
+@onready var rocket: Rocket = $"../EntityContainer/Rocket"
 
 func _ready() -> void:
 	camera.offset.y = -4100

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://syr77ofup15a"]
 
-[ext_resource type="Script" uid="uid://clyecj115hq3o" path="res://entities/lever.gd" id="1_uw28k"]
+[ext_resource type="Script" uid="uid://clyecj115hq3o" path="res://entities/lever/lever.gd" id="1_uw28k"]
 [ext_resource type="Texture2D" uid="uid://8siyted6cvdb" path="res://assets/entities/Lever.png" id="2_uljin"]
 [ext_resource type="AudioStream" uid="uid://cq85c35bjm4yf" path="res://assets/sfx/lever.mp3" id="3_h3gyv"]
 

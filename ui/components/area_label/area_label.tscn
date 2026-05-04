@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://sq1phdaknypq"]
 
-[ext_resource type="Script" uid="uid://wtl84kfkwkky" path="res://core/utils/area_label.gd" id="1_g7fbu"]
+[ext_resource type="Script" uid="uid://wtl84kfkwkky" path="res://ui/components/area_label/area_label.gd" id="1_g7fbu"]
 [ext_resource type="FontFile" uid="uid://bkfnyilcudo8r" path="res://assets/fonts/Caveat-VariableFont_wght.ttf" id="2_1pwqi"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_g7fbu"]

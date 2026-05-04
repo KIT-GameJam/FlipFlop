@@ -4,8 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://bsohonq75ieg2" path="res://entities/portal/portal.tscn" id="2_2xxb0"]
 [ext_resource type="PackedScene" uid="uid://bqtj0b3vwlp4q" path="res://entities/portal/level_entrance.tscn" id="2_dcspb"]
 [ext_resource type="Texture2D" uid="uid://c7yg15vg2wufa" path="res://assets/tiles/tiles_atlas.png" id="2_litj0"]
-[ext_resource type="PackedScene" uid="uid://bfwsk8h04smyi" path="res://entities/rocket.tscn" id="5_wmrwu"]
-[ext_resource type="Script" uid="uid://c8fjs1bpb88io" path="res://levels/animations/end_animation.gd" id="6_dcspb"]
+[ext_resource type="PackedScene" uid="uid://bfwsk8h04smyi" path="res://entities/rocket/rocket.tscn" id="5_wmrwu"]
+[ext_resource type="Script" uid="uid://c8fjs1bpb88io" path="res://levels/99_end_animation.gd" id="6_dcspb"]
 [ext_resource type="FontFile" uid="uid://bkfnyilcudo8r" path="res://assets/fonts/Caveat-VariableFont_wght.ttf" id="7_b54lc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1u8rv"]

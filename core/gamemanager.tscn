@@ -6,7 +6,7 @@
 [ext_resource type="Theme" uid="uid://hheneshfv1b2" path="res://ui/themes/your_theme.tres" id="3_8qpx4"]
 [ext_resource type="AudioStream" uid="uid://crmh5p5v83bh2" path="res://assets/music/background.mp3" id="3_t557q"]
 [ext_resource type="AudioStream" uid="uid://8w6djbbnbvft" path="res://assets/sfx/portal.mp3" id="4_xlp76"]
-[ext_resource type="Script" uid="uid://bf58dhqg7c5xi" path="res://core/utils/camera.gd" id="5_x5fxv"]
+[ext_resource type="PackedScene" uid="uid://lihhoyutowlt" path="res://entities/camera/global_camera.tscn" id="5_x5fxv"]
 
 [node name="Gamemanager" type="Node" unique_id=1050225795]
 process_mode = 3
@@ -25,9 +25,7 @@ bus = &"Music"
 stream = ExtResource("4_xlp76")
 bus = &"SFX"
 
-[node name="GlobalCamera" type="Camera2D" parent="." unique_id=2039207859 groups=["camera"]]
-anchor_mode = 0
-script = ExtResource("5_x5fxv")
+[node name="GlobalCamera" parent="." unique_id=576881291 instance=ExtResource("5_x5fxv")]
 
 [node name="MenuLayer" type="CanvasLayer" parent="." unique_id=1393391734]
 unique_name_in_owner = true

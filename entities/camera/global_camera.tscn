@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://lihhoyutowlt"]
+
+[ext_resource type="Script" uid="uid://bf58dhqg7c5xi" path="res://entities/camera/camera.gd" id="1_qlck3"]
+
+[node name="GlobalCamera" type="Camera2D" unique_id=576881291 groups=["camera"]]
+anchor_mode = 0
+script = ExtResource("1_qlck3")
