@@ -29,3 +29,5 @@ shape = SubResource("CircleShape2D_ujmca")
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1119629883]
 material = SubResource("ShaderMaterial_lirgq")
 texture = ExtResource("2_ujmca")
+
+[connection signal="body_entered" from="." to="." method="_on_area_2d_body_entered"]

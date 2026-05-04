@@ -8,6 +8,9 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n1jrk"]
 size = Vector2(200, 200)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2nfk1"]
+size = Vector2(160, 160)
+
 [node name="Level2" unique_id=226412309 instance=ExtResource("1_lahip")]
 
 [node name="TileMapLayer" parent="." index="0" unique_id=502832762]
@@ -41,3 +44,11 @@ black_color = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EntityContainer/AreaLabel" index="2" unique_id=1671512846]
 position = Vector2(7, 89)
 shape = SubResource("RectangleShape2D_n1jrk")
+
+[node name="AreaLabel2" parent="EntityContainer" parent_id_path=PackedInt32Array(358132125) index="1" unique_id=176935024 instance=ExtResource("4_2nfk1")]
+position = Vector2(18, 311)
+text = "Press {reset} to reset"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EntityContainer/AreaLabel2" index="2" unique_id=927925968]
+position = Vector2(142, -231)
+shape = SubResource("RectangleShape2D_2nfk1")

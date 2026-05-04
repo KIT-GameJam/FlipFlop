@@ -3,7 +3,7 @@ extends StaticBody2D
 
 signal rocket_start
 
-@export var spawn_opened = true
+@export var spawn_opened := true
 @export var spawn_with_lever := true
 @export var spawn_with_particles := false
 
@@ -23,7 +23,7 @@ func _ready() -> void:
 		close_door()
 	if not spawn_with_lever:
 		lever.visible = false
-		lever.disabled
+		lever.disabled = true
 
 func start() -> void:
 	close_door()
@@ -33,8 +33,8 @@ func start() -> void:
 	camera.translate_with_node(self, global_position)
 
 func crash() -> void:
-	particles.speed_scale = 1
-	camera.start_shake(10)
+	particles.speed_scale = 1.0
+	camera.start_shake(10.0)
 	crash_sprite.visible = true
 	var timer: SceneTreeTimer = get_tree().create_timer(1)
 	await timer.timeout
