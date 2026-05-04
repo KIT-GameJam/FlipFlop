@@ -54,6 +54,12 @@ _data = {
 &"crash_rocket": SubResource("Animation_vj266")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pgy3k"]
+size = Vector2(200, 150)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3ujfv"]
+size = Vector2(80, 80)
+
 [node name="Level1" unique_id=226412309 instance=ExtResource("1_vn7o3")]
 
 [node name="TileMapLayer" parent="." index="0" unique_id=502832762]
@@ -107,8 +113,22 @@ position = Vector2(193, 600)
 position = Vector2(1256, 280)
 
 [node name="AreaLabel" parent="." index="8" unique_id=1269334380 instance=ExtResource("8_pgy3k")]
-position = Vector2(605, 585)
-text = "Press Space to jump"
+position = Vector2(571, 530)
+text = "Press {jump} to jump"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaLabel" index="2" unique_id=909662125]
+position = Vector2(89, 110)
+scale = Vector2(1, 1.0611918)
+shape = SubResource("RectangleShape2D_pgy3k")
+
+[node name="AreaLabel2" parent="." index="9" unique_id=662172264 instance=ExtResource("8_pgy3k")]
+position = Vector2(44, 130)
+text = "Press {move_left} and {move_right} to move"
+black_color = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaLabel2" index="2" unique_id=25479775]
+position = Vector2(160, 430)
+shape = SubResource("RectangleShape2D_3ujfv")
 
 [connection signal="body_entered" from="CameraFollow" to="AnimationPlayer" method="_on_camera_follow_body_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="AnimationPlayer" method="_on_animation_finished"]

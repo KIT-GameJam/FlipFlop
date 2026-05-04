@@ -5,6 +5,7 @@ signal game_pause
 signal game_unpause
 signal game_debug_show
 signal game_debug_hide
+signal input_type_changed(type: InputType)
 #endregion
 
 #region Game State Management
@@ -14,12 +15,15 @@ var is_debug_label_visible: bool = false
 var capture_mouse_ingame: bool = true
 #endregion
 
-enum InputType {MOUSE, JOYPAD}
+enum InputType {KEYBOARD, JOYPAD}
+
+var current_input_type: InputType = InputType.KEYBOARD
 
 func _ready():
 	set_process_mode(Node.PROCESS_MODE_ALWAYS)
 
 func _input(event: InputEvent) -> void:
+	_track_input_type(event)
 
 	if event.is_action_pressed("pause"):
 		if (_is_in_game and not _is_paused):
@@ -33,6 +37,16 @@ func _input(event: InputEvent) -> void:
 			game_debug_show.emit()
 	elif not _is_in_game: 
 		pass
+
+func _track_input_type(event: InputEvent) -> void:
+	var new_type := current_input_type
+	if event is InputEventKey or event is InputEventMouseButton:
+		new_type = InputType.KEYBOARD
+	elif event is InputEventJoypadButton or event is InputEventJoypadMotion:
+		new_type = InputType.JOYPAD
+	if new_type != current_input_type:
+		current_input_type = new_type
+		input_type_changed.emit(new_type)
 
 func set_is_in_game(b: bool) -> void:
 	_is_in_game = b

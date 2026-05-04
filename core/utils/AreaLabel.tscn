@@ -3,13 +3,9 @@
 [ext_resource type="Script" uid="uid://wtl84kfkwkky" path="res://core/utils/area_label.gd" id="1_g7fbu"]
 [ext_resource type="FontFile" uid="uid://bkfnyilcudo8r" path="res://assets/fonts/Caveat-VariableFont_wght.ttf" id="2_1pwqi"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_hsc1c"]
-size = Vector2(400, 400)
-
-[sub_resource type="LabelSettings" id="LabelSettings_sqpjv"]
+[sub_resource type="LabelSettings" id="LabelSettings_g7fbu"]
 font = ExtResource("2_1pwqi")
 font_size = 48
-font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="Animation" id="Animation_hsc1c"]
 length = 0.001
@@ -64,29 +60,23 @@ _data = {
 }
 
 [node name="AreaLabel" type="Area2D" unique_id=1269334380]
-collision_layer = 0
+collision_layer = 8
 collision_mask = 8
 script = ExtResource("1_g7fbu")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1867719813]
-shape = SubResource("RectangleShape2D_hsc1c")
+text = "Schreibe hier deinen Text"
+black_color = false
 
 [node name="Label" type="Label" parent="." unique_id=1040572879]
-anchors_preset = 8
-anchor_left = 0.5
+anchors_preset = 4
 anchor_top = 0.5
-anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -93.0
 offset_top = -61.0
-offset_right = 93.0
+offset_right = 408.0
 offset_bottom = 61.0
-grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
-text = "Hier steht ein beschreibender Text"
-label_settings = SubResource("LabelSettings_sqpjv")
-horizontal_alignment = 1
+text = "Schreibe hier deinen Text"
+label_settings = SubResource("LabelSettings_g7fbu")
 vertical_alignment = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1789956065]
