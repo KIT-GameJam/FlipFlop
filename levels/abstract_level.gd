@@ -6,7 +6,6 @@ signal won
 enum Level {
 	Start,
 	Tower,
-	Pillars,
 	TheFall,
 	Wall,
 	Spikes,
