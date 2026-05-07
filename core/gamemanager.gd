@@ -65,7 +65,7 @@ func _process(delta: float) -> void:
 	DebugGlobal.set_debug_info("FPS", roundi(1 / delta))
 
 func _start_game() -> void:
-	_show_controls()
+	_show_main_level()
 
 #region Pausing
 
