@@ -17,6 +17,8 @@ var capture_mouse_ingame: bool = true
 
 enum InputType {KEYBOARD, JOYPAD}
 
+const JOYPAD_MOTION_DEADZONE: float = 0.5
+
 var current_input_type: InputType = InputType.KEYBOARD
 
 func _ready():
@@ -42,7 +44,11 @@ func _track_input_type(event: InputEvent) -> void:
 	var new_type := current_input_type
 	if event is InputEventKey or event is InputEventMouseButton:
 		new_type = InputType.KEYBOARD
-	elif event is InputEventJoypadButton or event is InputEventJoypadMotion:
+	elif event is InputEventJoypadButton:
+		new_type = InputType.JOYPAD
+	elif event is InputEventJoypadMotion:
+		if absf(event.axis_value) < JOYPAD_MOTION_DEADZONE:
+			return
 		new_type = InputType.JOYPAD
 	if new_type != current_input_type:
 		current_input_type = new_type
