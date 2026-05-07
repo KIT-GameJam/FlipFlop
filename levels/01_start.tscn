@@ -79,7 +79,7 @@ level = 8
 position = Vector2(1300, 680)
 scale = Vector2(1, 2)
 level = 7
-entrance = null
+spawn_black = true
 
 [node name="Spawn" parent="SpawnContainer" parent_id_path=PackedInt32Array(534009837) index="0" unique_id=863920017 instance=ExtResource("4_ua5ty")]
 position = Vector2(193, 600)
