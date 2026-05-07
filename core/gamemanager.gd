@@ -8,7 +8,14 @@ class_name GameManager
 
 @onready var pause_menu: Control = %PauseMenu
 @onready var menu_layer: CanvasLayer = %MenuLayer
+@onready var fade_rect: ColorRect = %TransitionFadeLayer/FadeRect
 @onready var sfx_stream_player: AudioStreamPlayer = $SFXStreamPlayer
+
+const TRANSITION_FADE_DURATION: float = 0.25
+const TRANSITION_WALK_IN_DURATION: float = 0.35
+const TRANSITION_WALK_IN_OFFSET: float = 30.0
+
+var _is_transitioning: bool = false
 
 const LEVELS: Dictionary[AbstractLevel.Level, PackedScene] = {
 	AbstractLevel.Level.Start:      preload("res://levels/01_start.tscn"),
@@ -136,6 +143,77 @@ func respawn() -> void:
 	for lever in current_level_node.levers:
 		lever.reset()
 	change_level(current_level, last_entrance)
+
+func enter_transition(target_level: AbstractLevel.Level, from_side: LevelTransition.Side) -> void:
+	if _is_transitioning:
+		return
+	_is_transitioning = true
+
+	player.stop_scripted_walk()
+	player.velocity = Vector2.ZERO
+	player.set_physics_process(false)
+
+	await _fade_to(1.0, TRANSITION_FADE_DURATION)
+
+	var opposite_side := LevelTransition.Side.RIGHT if from_side == LevelTransition.Side.LEFT else LevelTransition.Side.LEFT
+	var landed_on_transition := await _swap_level_at_transition(target_level, opposite_side)
+
+	player.set_physics_process(true)
+	if landed_on_transition:
+		var walk_dir: float = 1.0 if opposite_side == LevelTransition.Side.LEFT else -1.0
+		player.start_scripted_walk(walk_dir, TRANSITION_WALK_IN_DURATION)
+
+	await _fade_to(0.0, TRANSITION_FADE_DURATION)
+	_is_transitioning = false
+
+func _fade_to(target_alpha: float, duration: float) -> void:
+	var tween := create_tween()
+	tween.tween_property(fade_rect, "color:a", target_alpha, duration)
+	await tween.finished
+
+func _swap_level_at_transition(target_level: AbstractLevel.Level, target_side: LevelTransition.Side) -> bool:
+	player.hit_box_vertical.set_deferred("disabled", true)
+	player.hit_box_horizontal.set_deferred("disabled", true)
+	var collision_layer := player.collision_layer
+	var collision_mask := player.collision_mask
+	player.collision_layer = 0
+	player.collision_mask = 0
+
+	if target_level != current_level or current_level_node == null:
+		if current_level_node != null:
+			remove_child.call_deferred(current_level_node)
+		current_level = target_level
+		current_level_node = loaded_levels[target_level]
+		add_child.call_deferred(current_level_node)
+	await get_tree().process_frame
+
+	var target_transition := current_level_node.find_transition_by_side(target_side)
+	var spawn_pos: Vector2
+	var spawn_flipped: bool = player.flipped
+	var landed_on_transition := false
+	if target_transition != null:
+		var inward_offset: float = TRANSITION_WALK_IN_OFFSET if target_side == LevelTransition.Side.LEFT else -TRANSITION_WALK_IN_OFFSET
+		spawn_pos = target_transition.position + Vector2(inward_offset, 0)
+		landed_on_transition = true
+	elif current_level_node.entrances.size() > 0:
+		var fallback := current_level_node.entrances[0]
+		spawn_pos = fallback.position
+		spawn_flipped = fallback.flipped
+		push_warning("No matching transition on side %s in level %s — falling back to entrance 0" % [target_side, target_level])
+	else:
+		push_error("No transition or entrance found in target level")
+		spawn_pos = player.position
+
+	last_entrance = 0
+	player.position = spawn_pos
+	player.set_flipped(spawn_flipped)
+
+	player.hit_box_vertical.disabled = false
+	player.hit_box_horizontal.disabled = false
+	player.collision_layer = collision_layer
+	player.collision_mask = collision_mask
+	sfx_stream_player.play()
+	return landed_on_transition
 
 #endregion
 

@@ -29,12 +29,22 @@ enum Level {
 
 var entrances: Array[LevelEntrance] = []
 var levers: Array[Lever] = []
+var transitions: Array[LevelTransition] = []
 
 func _ready() -> void:
 	for entrance in find_children("", "LevelEntrance"):
 		entrances.append(entrance)
 	for lever in find_children("", "Lever"):
 		levers.append(lever)
+	for t in find_children("", "Area2D"):
+		if t is LevelTransition:
+			transitions.append(t)
+
+func find_transition_by_side(side: LevelTransition.Side) -> LevelTransition:
+	for transition in transitions:
+		if transition.side == side:
+			return transition
+	return null
 
 
 func _on_rocket_start() -> void:

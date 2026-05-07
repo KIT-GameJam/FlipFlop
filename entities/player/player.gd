@@ -30,8 +30,9 @@ var flipped: bool = false:
 
 var last_direction: float = 0.0
 var coyote_timer: float = 0.0
-
 var close_levers: Array[Lever] = []
+var scripted_walk_direction: float = 0.0
+var scripted_walk_timer: float = 0.0
 
 func _ready():
 	sprite.modulate = Color.BLACK
@@ -58,6 +59,15 @@ func set_flipped(to_flipped: bool) -> void:
 	sprite.scale.y = -s
 	sprite.modulate = Color.WHITE if to_flipped else Color.BLACK
 	flipped = to_flipped
+
+func start_scripted_walk(direction: float, duration: float) -> void:
+	scripted_walk_direction = signf(direction)
+	scripted_walk_timer = duration
+
+func stop_scripted_walk() -> void:
+	scripted_walk_direction = 0.0
+	scripted_walk_timer = 0.0
+	velocity.x = 0.0
 
 func _perform_flip(to_flipped: bool) -> void:
 	var target_collision_position := Vector2(0, 35 if to_flipped else -35)
@@ -99,6 +109,18 @@ func _get_flipped_integer() -> int:
 	return 1 if flipped else -1
 
 func _physics_process(delta: float) -> void:
+	if scripted_walk_timer > 0.0:
+		scripted_walk_timer -= delta
+		if scripted_walk_timer <= 0.0:
+			stop_scripted_walk()
+		else:
+			_apply_gravity(delta)
+			last_direction = scripted_walk_direction
+			velocity.x = scripted_walk_direction * SPEED
+			move_and_slide()
+			_update_animations()
+			return
+
 	if not in_flipping_animation:
 		_apply_gravity(delta)
 		_handle_input()
