@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://cotahv3cgln1o"]
+
+[ext_resource type="PackedScene" uid="uid://b1iud80r7wwcw" path="res://levels/01_start.tscn" id="1_cmvt6"]
+[ext_resource type="PackedScene" uid="uid://bwlt0ndshqru7" path="res://levels/02_floor.tscn" id="2_cfs2e"]
+
+[node name="WorldMap" type="Node2D" unique_id=1750467739]
+
+[node name="LevelStart" parent="." unique_id=226412309 instance=ExtResource("1_cmvt6")]
+
+[node name="LevelFloor" parent="." unique_id=484854344 instance=ExtResource("2_cfs2e")]
+position = Vector2(1440, 0)
