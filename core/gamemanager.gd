@@ -1,6 +1,8 @@
 extends Node
 class_name GameManager
 
+signal won
+
 ## Use this when you have only one level
 @export var main_level := AbstractLevel.Level.Start
 ## Whether the mouse should be captured while in a level
@@ -9,6 +11,8 @@ class_name GameManager
 @onready var pause_menu: Control = %PauseMenu
 @onready var menu_layer: CanvasLayer = %MenuLayer
 @onready var sfx_stream_player: AudioStreamPlayer = $SFXStreamPlayer
+@onready var stopwatch: Stopwatch = $Stopwatch
+@onready var stopwatch_label: Label = %StopwatchLabel
 
 const LEVELS: Dictionary[AbstractLevel.Level, PackedScene] = {
 	AbstractLevel.Level.Start:      preload("res://levels/01_start.tscn"),
@@ -56,13 +60,31 @@ func _ready() -> void:
 	InputManager.game_pause.connect(pause)
 	InputManager.game_unpause.connect(resume)
 	InputManager.capture_mouse_ingame = is_mouse_captured_in_level
-	InputManager.set_is_in_game(false)
-	InputManager.set_is_paused(false)
+	InputManager.is_in_game = false
+	InputManager.is_paused = false
 
 	_show_title_screen()
 
 func _process(delta: float) -> void:
 	DebugGlobal.set_debug_info("FPS", roundi(1 / delta))
+
+	if InputManager.is_in_game:
+		stopwatch_label.visible = true
+		# update stopwatch label
+		var time := stopwatch.elapsed_time
+		var seconds := fmod(time, 60)
+		var minutes := int(time / 60)
+		var text: String
+		if minutes < 60:
+			text = "%02d:%06.3f" % [minutes, seconds]
+		else:
+			@warning_ignore("integer_division")
+			var hours := int(minutes / 60)
+			minutes %= 60
+			text = "%d:%02d:%06.3f" % [hours, minutes, seconds]
+		stopwatch_label.text = text
+	else:
+		stopwatch_label.visible = false
 
 func _start_game() -> void:
 	_show_main_level()
@@ -70,14 +92,14 @@ func _start_game() -> void:
 #region Pausing
 
 func pause():
-	InputManager.set_is_paused(true)
+	InputManager.is_paused = true
 	move_child(menu_layer, -1)
 	pause_menu.move_to_front()
 	pause_menu.show()
 	get_tree().paused = true
 
 func resume():
-	InputManager.set_is_paused(false)
+	InputManager.is_paused = false
 	print("resume")
 	pause_menu.hide()
 	pause_menu.reset()
@@ -98,11 +120,13 @@ func _show_main_level() -> void:
 		player = PlayerScene.instantiate()
 		add_child(player)
 
-	InputManager.set_is_in_game(true)
+	InputManager.is_in_game = true
 	loaded_levels.clear()
 	for level in LEVELS:
 		loaded_levels[level] = LEVELS[level].instantiate()
 	change_level(main_level, 0)
+
+	stopwatch.start()
 
 func change_level(new_level: AbstractLevel.Level, entrance: int) -> void:
 	# disable player collision to prevent interactions with new level
@@ -141,19 +165,13 @@ func respawn() -> void:
 
 #region Showing Different GUI views
 
-func _show_win_screen() -> void:
-	InputManager.set_is_in_game(false)
-	var win_screen: Control = load("res://ui/screens/win-screen/win_screen.tscn").instantiate()
-	win_screen.tree_exited.connect(_show_title_screen)
-	add_child(win_screen)
-
 func _show_credits() -> void:
 	var credits: Node = load("res://ui/screens/credit-screen/credit_screen.tscn").instantiate()
 	credits.tree_exited.connect(_show_title_screen)
 	menu_layer.add_child(credits)
 
 func _show_title_screen() -> void:
-	InputManager.set_is_in_game(false)
+	InputManager.is_in_game = false
 	var title_screen: Node = load("res://ui/screens/title-screen/title_screen.tscn").instantiate()
 	title_screen.start_game.connect(_start_game)
 	title_screen.show_credits.connect(_show_credits)
@@ -179,8 +197,8 @@ func _show_controls() -> void:
 
 func _return_to_title_screen() -> void:
 	get_tree().paused = false
-	InputManager.set_is_paused(false)
-	InputManager.set_is_in_game(false)
+	InputManager.is_paused = false
+	InputManager.is_in_game = false
 
 	# Destroy levels
 	for level in loaded_levels.values():
@@ -193,6 +211,8 @@ func _return_to_title_screen() -> void:
 		player.queue_free()
 		player = null
 
+	stopwatch.stop()
+
 	_show_title_screen()
 
 #endregion
@@ -203,3 +223,6 @@ func _quit_game() -> void:
 
 func set_world_environment(env: Environment):
 	$WorldEnvironment.environment = env
+
+func _on_won() -> void:
+	stopwatch.stop()

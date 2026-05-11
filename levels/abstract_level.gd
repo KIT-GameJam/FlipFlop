@@ -1,8 +1,6 @@
 class_name AbstractLevel
 extends Node2D
 
-signal won
-
 enum Level {
 	Start,
 	Tower,
@@ -38,4 +36,4 @@ func _ready() -> void:
 
 
 func _on_rocket_start() -> void:
-	won.emit()
+	Global.game_manager.won.emit()

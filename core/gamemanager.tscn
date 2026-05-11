@@ -7,6 +7,8 @@
 [ext_resource type="AudioStream" uid="uid://crmh5p5v83bh2" path="res://assets/music/background.mp3" id="3_t557q"]
 [ext_resource type="AudioStream" uid="uid://8w6djbbnbvft" path="res://assets/sfx/portal.mp3" id="4_xlp76"]
 [ext_resource type="PackedScene" uid="uid://lihhoyutowlt" path="res://entities/camera/global_camera.tscn" id="5_x5fxv"]
+[ext_resource type="StyleBox" uid="uid://c1wl38yfryo3c" path="res://ui/themes/background_stylebox.tres" id="6_nopsl"]
+[ext_resource type="PackedScene" uid="uid://b3gyw7e7cmf20" path="res://ui/stopwatch/stopwatch.tscn" id="7_x5fxv"]
 
 [node name="Gamemanager" type="Node" unique_id=1050225795]
 process_mode = 3
@@ -39,11 +41,25 @@ offset_right = 600.0
 offset_bottom = 308.0
 theme = ExtResource("3_8qpx4")
 
+[node name="StopwatchLabel" type="Label" parent="MenuLayer" unique_id=54735161]
+unique_name_in_owner = true
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 23.0
+grow_horizontal = 0
+theme_override_styles/normal = ExtResource("6_nopsl")
+
 [node name="PauseMenu" parent="MenuLayer" unique_id=912678162 instance=ExtResource("2_b2lg8")]
 unique_name_in_owner = true
 visible = false
 theme = ExtResource("3_8qpx4")
 
+[node name="Stopwatch" parent="." unique_id=1224008396 instance=ExtResource("7_x5fxv")]
+process_mode = 1
+
+[connection signal="won" from="." to="." method="_on_won"]
 [connection signal="continue_btn_pressed" from="MenuLayer/PauseMenu" to="." method="resume"]
 [connection signal="exit_game_btn_pressed" from="MenuLayer/PauseMenu" to="." method="_quit_game"]
 [connection signal="exit_to_main_menu_btn_pressed" from="MenuLayer/PauseMenu" to="." method="_return_to_title_screen"]
