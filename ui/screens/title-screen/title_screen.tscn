@@ -100,7 +100,7 @@ offset_right = 76.5
 offset_bottom = -2.0
 grow_horizontal = 2
 grow_vertical = 0
-text = "v1.0-gamejam"
+text = "v1.0-gamejam.2"
 label_settings = SubResource("LabelSettings_wly7t")
 horizontal_alignment = 1
 

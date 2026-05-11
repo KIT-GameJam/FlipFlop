@@ -11,7 +11,8 @@ config_version=5
 [application]
 
 config/name="FlipFlop"
-config/version="v1.0.0-alpha"
+config/description="Lost from his team and stranded on a strange, silent planet, an agent crash landed near a mysterious structure unlike anything he has seen before. To escape, he must journey through quiet corridors and puzzling rooms filled. Maybe he will find a way out of this strange world."
+config/version="v1.0-gamejam.2"
 run/main_scene="res://core/gamemanager.tscn"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 boot_splash/bg_color=Color(0, 0, 0, 1)
@@ -47,7 +48,8 @@ folder_colors={
 "res://core/": "red",
 "res://entities/": "purple",
 "res://levels/": "blue",
-"res://ui/": "teal"
+"res://ui/": "teal",
+"res://upload/": "gray"
 }
 
 [global_group]
