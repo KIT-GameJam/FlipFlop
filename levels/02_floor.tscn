@@ -25,11 +25,6 @@ position = Vector2(1276, 544)
 level = 7
 entrance = 1
 
-[node name="Portal2Start" parent="PortalContainer" parent_id_path=PackedInt32Array(1798405141) index="2" unique_id=1946170073 instance=ExtResource("3_jqiq6")]
-position = Vector2(-20, 620)
-spawn_visible = false
-entrance = 1
-
 [node name="LevelEntrance" parent="SpawnContainer" parent_id_path=PackedInt32Array(534009837) index="0" unique_id=46011893 instance=ExtResource("2_8iw4i")]
 position = Vector2(30, 680)
 
