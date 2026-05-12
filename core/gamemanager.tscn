@@ -37,9 +37,10 @@ unique_name_in_owner = true
 visible = false
 offset_left = 23.0
 offset_top = 16.0
-offset_right = 600.0
-offset_bottom = 308.0
+offset_right = 300.0
+offset_bottom = 150.0
 theme = ExtResource("3_8qpx4")
+theme_override_styles/normal = ExtResource("6_nopsl")
 
 [node name="StopwatchLabel" type="Label" parent="MenuLayer" unique_id=54735161]
 unique_name_in_owner = true
