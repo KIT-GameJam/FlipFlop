@@ -14,6 +14,9 @@ size = Vector2(32, 70)
 radius = 15.0
 height = 70.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sglur"]
+size = Vector2(20, 70)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l1ths"]
 size = Vector2(30, 70)
 
@@ -307,6 +310,14 @@ shape = SubResource("RectangleShape2D_ks8m5")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LeverArea" unique_id=1808146002]
 position = Vector2(0, -35)
 shape = SubResource("CapsuleShape2D_eh0f6")
+
+[node name="FlipArea" type="Area2D" parent="." unique_id=1917973575]
+position = Vector2(0, 35.08)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FlipArea" unique_id=840285081]
+shape = SubResource("RectangleShape2D_sglur")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2085429514]
 position = Vector2(0, -35)

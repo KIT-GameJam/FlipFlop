@@ -17,6 +17,7 @@ const SFX := {
 @onready var hit_box_vertical: CollisionShape2D = $HitBoxVertical/CollisionShape2D
 @onready var hit_box_horizontal: CollisionShape2D = $HitBoxHorizontal/CollisionShape2D
 @onready var lever_area: CollisionShape2D = $LeverArea/CollisionShape2D
+@onready var flip_area: Area2D = $FlipArea
 @onready var sprite: AnimatedSprite2D = $Sprite
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
@@ -38,15 +39,26 @@ func _ready():
 	floor_snap_length = 8.0
 
 func flip() -> void:
-	_perform_flip(not flipped)
+	if flip_area.has_overlapping_bodies():
+		# not enough space to flip
+		animation_player.play(&"flipflop_up" if flipped else &"flipflop_down")
+		in_flipping_animation = true
+	else:
+		set_flipped(not flipped)
 
 func is_on_ground() -> bool:
 	return is_on_floor()
 
-func set_flipped(to_flipped: bool) -> void:
-	if in_flipping_animation:
+func set_flipped(to_flipped: bool, force: bool = false) -> void:
+	if not force:
+		animation_player.play(&"flip_down" if to_flipped else &"flip_up")
+		player_sfx_player.play_sfx(SFX.flip)
+		in_flipping_animation = true
+	elif in_flipping_animation:
+		# cancel animation
 		animation_player.stop()
 		in_flipping_animation = false
+
 	var s := 1.0 if to_flipped else -1.0
 	set_collision_mask_value(LAYER_LIGHT, to_flipped)
 	set_collision_mask_value(LAYER_DARK, not to_flipped)
@@ -54,49 +66,13 @@ func set_flipped(to_flipped: bool) -> void:
 	hit_box_vertical.position.y = s * absf(hit_box_vertical.position.y)
 	hit_box_horizontal.position.y = s * absf(hit_box_horizontal.position.y)
 	lever_area.position.y = s * absf(lever_area.position.y)
+	flip_area.position.y = -s *absf(flip_area.position.y)
+	flip_area.set_collision_mask_value(LAYER_LIGHT, not to_flipped)
+	flip_area.set_collision_mask_value(LAYER_DARK, to_flipped)
 	sprite.position.y = s * absf(sprite.position.y)
 	sprite.scale.y = -s
 	sprite.modulate = Color.WHITE if to_flipped else Color.BLACK
 	flipped = to_flipped
-
-func _perform_flip(to_flipped: bool) -> void:
-	var target_collision_position := Vector2(0, 35 if to_flipped else -35)
-	var mask_to_enable := LAYER_LIGHT if to_flipped else LAYER_DARK
-	var mask_to_disable := LAYER_DARK if to_flipped else LAYER_LIGHT
-
-	set_collision_mask_value(mask_to_enable, true)
-	set_collision_mask_value(mask_to_disable, false)
-
-	if not _can_flip_to(target_collision_position):
-		set_collision_mask_value(mask_to_disable, true)
-		set_collision_mask_value(mask_to_enable, false)
-		_fail_flip()
-		return
-
-	collision_shape.position = target_collision_position
-	hit_box_vertical.position = target_collision_position
-	hit_box_horizontal.position = target_collision_position
-	lever_area.position = target_collision_position
-	animation_player.play(&"flip_down" if to_flipped else &"flip_up")
-	player_sfx_player.play_sfx(SFX.flip)
-	in_flipping_animation = true
-	flipped = to_flipped
-
-func _can_flip_to(target_collision_position: Vector2) -> Variant:
-	var original_collision_position := collision_shape.position
-	collision_shape.position = target_collision_position
-	collision_shape.shape.size.x -= 10
-	var is_blocked := test_move(global_transform, Vector2(0, _get_flipped_integer() * -1), null, 2, true)
-	collision_shape.position = original_collision_position
-	collision_shape.shape.size.x += 10
-	return not is_blocked
-
-func _fail_flip():
-	animation_player.play(&"flipflop_up" if flipped else &"flipflop_down")
-	in_flipping_animation = true
-
-func _get_flipped_integer() -> int:
-	return 1 if flipped else -1
 
 func _physics_process(delta: float) -> void:
 	if not in_flipping_animation:

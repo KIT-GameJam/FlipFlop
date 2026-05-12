@@ -43,7 +43,7 @@ var player: Player
 func _ready() -> void:
 	Global.set_game_manager(self)
 	DebugGlobal.debug_label = %DebugLabel
-	
+
 	# Environment
 	RenderingServer.set_default_clear_color(Color.BLACK)
 
@@ -128,7 +128,7 @@ func change_level(new_level: AbstractLevel.Level, entrance: int) -> void:
 	player.hit_box_horizontal.disabled = false
 	player.collision_layer = collision_layer
 	player.collision_mask = collision_mask
-	player.set_flipped(entrance_node.flipped)
+	player.set_flipped(entrance_node.flipped, true)
 	sfx_stream_player.play()
 
 func respawn() -> void:
