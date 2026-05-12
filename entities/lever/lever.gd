@@ -1,3 +1,4 @@
+@tool
 class_name Lever
 extends Area2D
 
@@ -23,9 +24,11 @@ const TILE_MAPPING: Dictionary[Array, Array] = {
 	[0, Vector2i(1, 2)]: [0, Vector2i(0, 2)],
 }
 
-func _ready() -> void:
+func _process(_delta: float) -> void:
 	if sprite_black:
 		modulate = Color.BLACK
+	else:
+		modulate = Color.WHITE
 
 func toggle() -> void:
 	if disabled:

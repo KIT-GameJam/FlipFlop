@@ -22,6 +22,7 @@ level = 11
 position = Vector2(380, 360)
 
 [node name="Lever" parent="EntityContainer" parent_id_path=PackedInt32Array(358132125) index="0" unique_id=2106870502 instance=ExtResource("2_ecr41")]
+modulate = Color(0, 0, 0, 1)
 position = Vector2(480, 360)
 sprite_black = true
 toggle_blocks = Array[Vector2i]([Vector2i(15, 7), Vector2i(15, 8), Vector2i(15, 9), Vector2i(15, 10)])
