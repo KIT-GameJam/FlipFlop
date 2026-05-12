@@ -68,7 +68,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	DebugGlobal.set_debug_info("FPS", roundi(1 / delta))
 
-	if InputManager.is_in_game:
+	if InputManager.is_in_game and Settings.get_value("graphics/stopwatch"):
 		stopwatch_label.visible = true
 		# update stopwatch label
 		var time := stopwatch.elapsed_time

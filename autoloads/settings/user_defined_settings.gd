@@ -35,6 +35,9 @@ func _register_graphics_settings() -> void:
 														_set_aa_mode_2d)
 		graphics_category.add_setting(aa_2d_setting)
 
+	var stopwatch_setting = Settings.BoolSetting.new("stopwatch", "Stopwatch", false)
+	graphics_category.add_setting(stopwatch_setting)
+
 	Settings.add_root_category(graphics_category)
 
 func _register_audio_settings() -> void:
