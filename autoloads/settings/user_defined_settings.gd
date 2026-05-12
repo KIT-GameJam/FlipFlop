@@ -25,14 +25,6 @@ func _register_graphics_settings() -> void:
 	var vsync_enabled_setting = Settings.BoolSetting.new("vsync_enabled", "VSync enabled", true, _set_vsync_enabled)
 	graphics_category.add_setting(vsync_enabled_setting)
 
-	var aa_3d_options: Array[String] = ["Disabled", "FXAA", "TAA", "MSAA 2x", "MSAA 4x", "FSR 2"]
-	var aa_3d_setting = Settings.OptionSetting.new("3d_aa_mode",
-													"3D Anti-Aliasing Mode",
-													"Disabled",
-													aa_3d_options,
-													_set_aa_mode_3d)
-	graphics_category.add_setting(aa_3d_setting)
-
 	# 2D MSAA is not yet available in the Compatibility renderer
 	if (ProjectSettings.get_setting_with_override("rendering/renderer/rendering_method") != "gl_compatibility"):
 		var aa_2d_options: Array[String] = ["Disabled", "MSAA 2x", "MSAA 4x", "MSAA 8x"]
